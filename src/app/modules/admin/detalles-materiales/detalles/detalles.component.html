@@ -1,0 +1,409 @@
+<div class="flex flex-col flex-auto min-w-0">
+
+    <ng-container *ngIf="(pedido$ | async) as pedido">
+        <div class="w-full max-w-screen-xl mx-auto">
+
+            <!-- Tabs -->
+
+            <div class="grid grid-cols-1 sm:grid-cols-2  md:grid-cols-1 gap-6 w-full min-w-0 p-[15px]">
+                <div class="sm:col-span-2 md:col-span-4 lg:col-span-1 flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden"
+                    style="padding-left: 0 !important; padding-right: 0 !important;height: fit-content;">
+                    <div class="flex items-start justify-between">
+                        <div class="text-lg font-medium tracking-tight leading-6 truncate pl-[24px] w-full"
+                            style="text-align: center;">
+                            <p>ORDEN DE PEDIDO # {{ pedido.id }}</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-col p-[10px] mt-2">
+                        <div>
+                            <div class="flex items-start justify-between">
+                                <div class="text-lg font-medium tracking-tight leading-6 truncate px-[24px] w-full">
+                                    <p>Cliente: {{ pedido.cliente }}</p>
+                                    <p>Proyecto: <span>{{ pedido.proyecto }}</span></p>
+                                    <p>Fecha Inicio: {{ pedido.startDate | date }} </p>
+                                </div>
+                                <div *ngIf="typeRolUser === ('SERVICIO AL CLIENTE')" class="flex items-start justify-between">
+                                    <div *ngIf="estadoDespacho === 'true' || estadoDespacho === 'Pagado'" class="text-lg font-medium tracking-tight leading-6 truncate px-[24px] w-full">
+                                        <button class="ml-4 px-1 sm:px-4 min-w-10 bg-red-500" mat-flat-button
+                                            (click)="generarNewDespacho()" (click)="generardespachoInicial()"
+                                            style="background: #00ffff00;color: #ffffff;">
+                                            <mat-icon class="icon-size-5"
+                                                [svgIcon]="'heroicons_solid:plus-circle'"></mat-icon>
+                                            <span class="hidden sm:inline-block ml-2">GENERAR DESPACHO</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div *ngIf="estadoDespacho === 'Pendiente de aprobación Finanzas'">
+                                    <p class="text-center text-md p-2 bg-orange-400 text-white rounded-lg"><span class="text-lg font-bold">Aviso: </span>Esparando aprobacion para despachar</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="sm:col-span-2 md:col-span-4 lg:col-span-1 flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden"
+                    style="height: fit-content;">
+
+                    <div class="flex justify-center items-center" id="contenedor2">
+                        <div id="principal2">
+                            <div class="Table">
+                                <div class="Title">
+                                    <p> Detalle de despacho proyecto {{title}}</p>
+                                </div>
+                                <div class="Heading">
+                                    <div class="Cell" *ngFor="let cabecera of displayedColumns">
+
+                                        <p>{{cabecera | titlecase}}</p>
+                                    </div>
+                                </div>
+
+                                <div class="Row" *ngFor="let prueba of dataTabla">
+                                    <div class="Cell" *ngFor="let cabecera of displayedColumns">
+                                        <p *ngIf="cabecera === 'detalle'" style="width: max-content;">
+                                            {{prueba[cabecera]}}
+                                        </p>
+                                        <p *ngIf="cabecera === 'cantidad'">
+                                            <spam *ngIf="prueba['unidad'] === 'm2'">{{(prueba[cabecera] * 8.09).toLocaleString('de-DE')}}</spam>
+                                            <spam *ngIf="prueba['unidad'] !== 'm2'">{{(prueba[cabecera]).toLocaleString('de-DE') }}</spam>
+                                        </p>
+                                        <p
+                                            *ngIf="cabecera !== 'detalle' && cabecera  !== 'precio'&& cabecera  !== 'total' && cabecera  !== 'cantidad'">
+                                            {{prueba[cabecera]}}
+                                        </p>
+                                        <p *ngIf="cabecera === 'precio'"> {{prueba[cabecera] === 0 ? '--' : "$"+(+prueba[cabecera]).toLocaleString('de-DE')}}</p>
+                                        <p *ngIf="cabecera === 'total'"> {{prueba[cabecera] === 0 ? '--' : "$"+(+prueba[cabecera]).toLocaleString('de-DE')}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- <div id="sidebar21" *ngFor="let guia of dataTablaGuias">
+                            <div class="Table">
+                                <div class="Title">
+                                    <p> Guia # {{guia?.guide}}</p>
+                                    <p> Fecha {{guia?.date | date }}</p>
+                                </div>
+                                <div class="Heading">
+                                    <div class="Cell">
+                                        <p>Detalle</p>
+                                    </div>
+                                    <div class="Cell">
+                                        <p style="width: max-content;">Cantidad (m2)</p>
+                                    </div>
+                                    <div class="Cell">
+                                        <p>Valor</p>
+                                    </div>
+                                </div>
+
+                                <div class="Row" *ngFor="let prueba of guia.detalle">
+                                    <div class="Cell">
+                                        <p>{{prueba.detalle}}</p>
+                                    </div>
+                                    <div class="Cell">
+                                        <p>{{prueba.cantidad | number}}</p>
+                                    </div>
+                                    <div class="Cell">
+                                        <p>{{prueba.total | currency}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+
+                        <div class="flex" *ngIf="tablaDetalles">
+                            <div id="sidebar3">
+                                <!--INICIO-->
+                                <div class="Table">
+                                    <div class="Title">
+                                        <p> Total Enviado</p>
+                                    </div>
+                                    <div class="Heading">
+                                        <!--<div class="Cell">
+                                            <p>Detalle</p>
+                                        </div>-->
+                                        <div class="Cell">
+                                            <p>Cantidad</p>
+                                        </div>
+                                        <div class="Cell">
+                                            <p>Valor</p>
+                                        </div>
+                                    </div>
+    
+                                    <div class="Row" *ngFor="let prueba of detalleEnvios">
+                                        <!--<div class="Cell">
+                                            <p>{{prueba.detalle}}</p>
+                                        </div>-->
+                                        <div class="Cell">
+                                            <!-- <p>{{prueba.cantidadEnviada ? (prueba.cantidadEnviada).toLocaleString('de-DE') : 0 | number}}</p> -->
+                                             <p>{{(+prueba.toFixed(2)).toLocaleString('de-DE')}}</p>
+                                        </div>
+                                        <div class="Cell">
+                                            <p>{{prueba.precioEnviado ? (prueba.cantidadEnviada).toLocaleString('de-DE') : 0 | currency}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+    
+    
+                                <!--FIN-->
+                            </div>
+    
+                            <div id="sidebar4">
+                                <div class="Table">
+                                    <div class="Title">
+                                        <p> Saldo por Enviar</p>
+                                    </div>
+                                    <div class="Heading">
+                                        <!--<div class="Cell">
+                                            <p>Detalle</p>
+                                        </div>-->
+                                        <div class="Cell">
+                                            <p>Cantidad</p>
+                                        </div>
+                                        <div class="Cell">
+                                            <p>Valor</p>
+                                        </div>
+                                    </div>
+    
+                                    <div class="Row" *ngFor="let prueba of detallesPorEnviar">
+                                        <!--<div class="Cell">
+                                            <p>{{prueba.detalle}}</p>
+                                        </div>-->
+                                        <div class="Cell">
+                                            <!-- <p>{{(+prueba.cantidad).toLocaleString('de-DE')| number}}</p> -->
+                                            <!-- <spam>{{prueba.unidad === 'm2' ? (prueba.cantidad * 8.09) : (prueba.cantidad)}}</spam> -->
+                                             <span>{{(+prueba.toFixed(2)).toLocaleString('de-DE')}}</span>
+                                        </div>
+                                        <div class="Cell">
+                                            <p> ${{0}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="sm:col-span-2 md:col-span-4 lg:col-span-1 flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden relative"style="height: fit-content;">
+                    <div *ngIf="typeRolUser === ('SERVICIO AL CLIENTE')" class="flex absolute top-0 right-0 gap-2">
+                        <p class="text-lg font-bold uppercase">Estado:</p>
+                        <div *ngIf="estadoDespacho === 'true'">
+                            <button (click)="validarEnvio()" class="text-sm text-white bg-red-500 hover:bg-red-600 px-2 py-1 mb-2 uppercase rounded-full">
+                                Validar despacho
+                            </button>
+                        </div>
+                        <div *ngIf="estadoDespacho === 'Pendiente de aprobación Finanzas'">
+                            <button class="text-sm text-white bg-orange-500 px-2 py-1 mb-2 uppercase rounded-full opacity-50 cursor-not-allowed" disabled>
+                                Notificado a Finanzas
+                            </button>
+                        </div>
+                        <div *ngIf="estadoDespacho === 'Aprobado por Finanzas'">
+                            <button class="text-sm text-white bg-blue-600 px-2 py-1 mb-2 uppercase rounded-full opacity-50 cursor-not-allowed" disabled>
+                                Aprobado por Finanzas
+                            </button>
+                        </div>
+                        <div *ngIf="estadoDespacho === 'Pagado'">
+                            <button class="text-sm text-white bg-green-600 px-2 py-1 mb-2 uppercase rounded-full opacity-50 cursor-not-allowed" disabled>
+                                Pagado
+                            </button>
+                        </div>
+                        <!-- <button (click)="validarEnvio(true)" (click)="notificacionFinanzas()"
+                            class="{{(estadoDespacho === ('Aprobado por Servicio al Cliente' || 'Aprobado por Finanzas')) ? 'text-sm text-white bg-green-600 px-2 py-1 mb-2 uppercase rounded-full opacity-50 cursor-not-allowed' : 'text-sm text-white bg-red-500 hover:bg-red-600 px-2 py-1 mb-2 uppercase rounded-full' }}">
+                            {{(estadoDespacho === ('Aprobado por Servicio al Cliente' || 'Aprobado por Finanzas')) ? 'Notificado a Finanzas' : 'Validar Despacho'}}
+                        </button> -->
+                    </div>
+                    <div *ngIf="typeRolUser === ('FINANZAS')" class="flex absolute top-0 right-0 gap-2">
+                        <p class="text-lg font-bold uppercase">Estado:</p>
+                        <!-- <button (click)="validarFinanzas()"
+                            class="{{(estadoDespacho === ('Aprobado por Servicio al Cliente')) ? 'text-sm text-white bg-red-500 hover:bg-red-600 px-2 py-1 mb-2 uppercase rounded-full' : 'text-sm text-white bg-green-600 px-2 py-1 mb-2 uppercase rounded-full opacity-50 cursor-not-allowed' }}">
+                            {{(estadoDespacho === ('Aprobado por Servicio al Cliente')) ? 'verificar valores' : 'valores verificados'}}
+                        </button> -->
+                        <div *ngIf="estadoDespacho === 'Pendiente de aprobación Finanzas'">
+                            <button (click)="validarFinanzas()" class="text-sm text-white bg-orange-500 hover:bg-orange-600 px-2 py-1 mb-2 uppercase rounded-full">
+                                verificar valores
+                            </button>
+                        </div>
+                        <div *ngIf="estadoDespacho === 'Aprobado por Finanzas'">
+                            <button class="text-sm text-white bg-green-600 px-2 py-1 mb-2 uppercase rounded-full opacity-50 cursor-not-allowed" disabled>
+                                valores verificados
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex justify-center items-center gap-4 text-lg font-medium tracking-tight leading-6 truncate pl-[24px] w-full"
+                        style="text-align: center;">
+                        <p >DESPACHO SELECCIONADO A ENVIAR</p>
+                    </div>
+                    <div id="contenedorCentrado" *ngIf="ultimaguia[0] !== undefined">
+
+                        <div id="sidebar2" *ngFor="let guia of ultimaguia">
+                            <div class="flex gap-4">
+                                <div class="Table">
+                                    <div class="Title">
+                                        <p> Guia # {{guia.guide}}</p>
+                                        <p> Fecha {{guia.date | date }}</p>
+                                    </div>
+                                    <div class="Heading">
+                                        <div class="Cell">
+                                            <p>Detalle</p>
+                                        </div>
+                                        <div class="Cell">
+                                            <p>Unidad</p>
+                                        </div>
+                                        <div class="Cell">
+                                            <p style="width: max-content;">Cantidad</p>
+                                        </div>
+                                        <div class="Cell">
+                                            <p>Valor</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="Row" *ngFor="let item of guia?.enviado">
+                                        <div class="Cell">
+                                            <p>{{item.descripcion}}</p>
+                                        </div>
+                                        <div class="Cell">
+                                            <p>{{item.unidades}}</p>
+                                        </div>
+                                        <div class="Cell">
+                                            <p>{{(+item.cantidad).toLocaleString('de-DE')}}</p>
+                                        </div>
+                                        <div class="Cell">
+                                            <p> ${{(+item.total).toLocaleString('de-DE')}}</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div id="contenedorCentrado" *ngIf="ultimaguia[0] === undefined">
+
+                        <p>NO SE A GENERADO DESPACHOS </p>
+
+                    </div>
+
+
+                </div>
+
+                <div class="sm:col-span-2 md:col-span-4 lg:col-span-1 flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden"
+                    style="height: fit-content;">
+                    <div class="text-lg font-medium tracking-tight leading-6 truncate pl-[24px] w-full"
+                        style="text-align: center;">
+                        <p>PEDIDO RESTANTE</p>
+                    </div>
+                    <div id="contenedorCentrado" *ngIf="ultimaguia[0] !== undefined">
+
+                        <div id="sidebar2" *ngFor="let guia of ultimaguia">
+                            <div class="flex gap-4">
+                                <div class="Table">
+                                    <div class="Title">
+                                        <p> Guia # {{guia.guide}}</p>
+                                        <p> Fecha {{guia.date | date }}</p>
+                                    </div>
+                                    <div class="Heading">
+                                        <div class="Cell">
+                                            <p>Detalle</p>
+                                        </div>
+                                        <div class="Cell">
+                                            <p>Unidades</p>
+                                        </div>
+                                        <div class="Cell">
+                                            <p style="width: max-content;">Cantidad</p>
+                                        </div>
+                                        <div class="Cell">
+                                            <p>Valor</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="Row" *ngFor="let item of guia?.porEnviar">
+                                        @if (guia?.porEnviar.length !== 0) {
+                                            <div class="Cell">
+                                                <p>{{item.descripcion}}</p>
+                                            </div>
+                                            <div class="Cell">
+                                                <p>{{item.unidades}}</p>
+                                            </div>
+                                            <div class="Cell">
+                                                <p>{{(+item.cantidad).toLocaleString('de-DE')}}</p>
+                                            </div>
+                                            <div class="Cell">
+                                                <p> ${{(+item.total).toLocaleString('de-DE')}}</p>
+                                            </div>
+
+                                        }@else {
+                                            <div class="text-xl font-bold uppercase">Todos los productos fueron despachados con exito!</div>
+                                        }
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div id="contenedorCentrado" *ngIf="ultimaguia[0] === undefined">
+
+                        <p>NO SE A GENERADO DESPACHOS </p>
+
+                    </div>
+
+
+                </div>
+
+                <div class="sm:col-span-2 md:col-span-4 lg:col-span-1 flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden"
+                    style="height: fit-content;">
+                    <div class="text-lg font-medium tracking-tight leading-6 truncate pl-[24px] w-full"
+                        style="text-align: center;">
+                        <p>ESTADO DE CUENTA PROYECTO {{ pedido.proyecto }}</p>
+                    </div>
+                    <div id="contenedorCentrado" *ngIf="ultimaguia[0] !== undefined">
+
+                        <div id="sidebar2" *ngFor="let guia of ultimaguia">
+                            <div class="Table">
+                                <!--<div class="Title">
+                                    <p> Guia # {{guia.guide}}</p>
+                                    <p> Fecha {{guia.date | date }}</p>
+                                </div>-->
+                                <div class="Heading">
+                                    <div class="Cell">
+                                        <p>Modulo 1 - ETAPA II</p>
+                                    </div>
+                                    <div class="Cell">
+                                        <p style="width: max-content;">Facturas</p>
+                                    </div>
+                                </div>
+
+                                <div class="Row" *ngFor="let prueba of guia?.detalle">
+                                    <div class="Cell">
+                                        <p>{{prueba?.detalle}}</p>
+                                    </div>
+                                    <div class="Cell">
+                                        <p>{{prueba?.cantidad | number}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div id="contenedorCentrado" *ngIf="ultimaguia[0] === undefined">
+
+                        <p>NO SE A GENERADO DESPACHOS </p>
+
+                    </div>
+
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </ng-container>
+</div>

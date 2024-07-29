@@ -1,0 +1,98 @@
+<div style="
+max-height: calc(100vh - 20vh);
+">
+    <form class="modal-box" method="dialog">
+        <div class="grid grid-cols-2 gap-2" style="padding: 24px;">
+            <div style="font-size: 20px;
+font-style: normal;
+font-weight: 500;
+line-height: 28px;"> {{title}} Inventario Filtro
+            </div>
+            <div style="padding-left: 95%">
+                <button (click)="onNoClick()" class=" bg-white text-black btn-sm btn-circle btn-ghost absolute ">
+                    <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM15.36 14.3C15.65 14.59 15.65 15.07 15.36 15.36C15.21 15.51 15.02 15.58 14.83 15.58C14.64 15.58 14.45 15.51 14.3 15.36L12 13.06L9.7 15.36C9.55 15.51 9.36 15.58 9.17 15.58C8.98 15.58 8.79 15.51 8.64 15.36C8.35 15.07 8.35 14.59 8.64 14.3L10.94 12L8.64 9.7C8.35 9.41 8.35 8.93 8.64 8.64C8.93 8.35 9.41 8.35 9.7 8.64L12 10.94L14.3 8.64C14.59 8.35 15.07 8.35 15.36 8.64C15.65 8.93 15.65 9.41 15.36 9.7L13.06 12L15.36 14.3Z"
+                            fill="#1B1B1D" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <form [formGroup]="this.range">
+            <mat-form-field class="example-full-width px-[24px]" style="width: 100%;">
+                <mat-label>Fecha</mat-label>
+
+                <input formControlName='start' type="date" id="date" matInput>
+                <mat-error>Es requerido</mat-error>
+            </mat-form-field>
+        </form>
+
+        <mat-label class="px-[24px]">Bodega *</mat-label>
+        <div class="ng-autocomplete example-full-width px-[24px]">
+            <ng-autocomplete [data]="bodegas" [searchKeyword]="keyword"
+                [placeholder]="tipo.bodega? tipo.bodega: 'Seleccione una Bodega'" (selected)='selectEvent($event)'
+                (inputChanged)='onChangeSearch($event)' (inputFocused)='onFocused($event)' [itemTemplate]="itemTemplate"
+                [notFoundTemplate]="notFoundTemplate">
+            </ng-autocomplete>
+
+            <ng-template #itemTemplate let-item>
+                <a [innerHTML]="item.bodega"></a>
+            </ng-template>
+
+            <ng-template #notFoundTemplate let-notFound>
+                <div [innerHTML]="notFound"></div>
+            </ng-template>
+        </div>
+
+        <mat-form-field class="example-full-width px-[24px]" style="width: 100%;">
+            <mat-label>Lector de Barras/Cod de Producto</mat-label>
+            <input [(ngModel)]="barras" [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. Marco Perez"
+                type="number" required>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width px-[24px]" style="width: 100%;">
+            <mat-label>Nombre</mat-label>
+            <input [(ngModel)]="name" [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. Marco Perez"
+                required>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width px-[24px]" style="width: 100%;">
+            <mat-label>Cantidad</mat-label>
+            <input [(ngModel)]="cantidad" [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. Marco Perez"
+                required>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width px-[24px]" style="width: 100%;">
+            <mat-label>Costo Unitario</mat-label>
+            <input [(ngModel)]="costoUnitario" [ngModelOptions]="{standalone: true}" matInput
+                placeholder="Ex. Marco Perez" required>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width px-[24px]" style="width: 100%;">
+            <mat-label>Costo Total</mat-label>
+            <input [(ngModel)]="costoTotal" [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. Marco Perez"
+                required>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width px-[24px]" style="width: 100%;">
+            <mat-label>Unidad de Medida</mat-label>
+            <input [(ngModel)]="unidadMedida" [ngModelOptions]="{standalone: true}" matInput
+                placeholder="Ex. Marco Perez" required>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width px-[24px]" style="width: 100%;">
+            <mat-label>Canal de Compra</mat-label>
+            <input [(ngModel)]="canalCompra" [ngModelOptions]="{standalone: true}" matInput
+                placeholder="Ex. Marco Perez" required>
+        </mat-form-field>
+
+        <div class="grid grid-cols-1 gap-2 py-[16px] px-[24px]">
+            <div>
+                <button (click)="guardarRegion()" class="btn4 bg-white text-black dark:text-black "
+                    style="width: 100%; text-align: end;">{{botton}}
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

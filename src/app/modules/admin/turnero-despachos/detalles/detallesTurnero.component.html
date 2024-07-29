@@ -1,0 +1,188 @@
+<div style="
+max-height: calc(100vh - 20vh);
+">
+    <form class="modal-box" method="dialog">
+        <div class="grid grid-cols-2 gap-2" style="padding: 24px;">
+            <div style="font-size: 20px;
+font-style: normal;
+font-weight: 500;
+line-height: 28px;"> {{title}} Despacho
+            </div>
+            <div style="padding-left: 95%">
+                <button (click)="onNoClick()" class=" bg-white text-black btn-sm btn-circle btn-ghost absolute ">
+                    <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM15.36 14.3C15.65 14.59 15.65 15.07 15.36 15.36C15.21 15.51 15.02 15.58 14.83 15.58C14.64 15.58 14.45 15.51 14.3 15.36L12 13.06L9.7 15.36C9.55 15.51 9.36 15.58 9.17 15.58C8.98 15.58 8.79 15.51 8.64 15.36C8.35 15.07 8.35 14.59 8.64 14.3L10.94 12L8.64 9.7C8.35 9.41 8.35 8.93 8.64 8.64C8.93 8.35 9.41 8.35 9.7 8.64L12 10.94L14.3 8.64C14.59 8.35 15.07 8.35 15.36 8.64C15.65 8.93 15.65 9.41 15.36 9.7L13.06 12L15.36 14.3Z"
+                            fill="#1B1B1D" />
+                    </svg>
+                </button>
+            </div>
+
+
+        </div>
+
+
+
+        <form [formGroup]="this.range">
+            <mat-form-field class="example-full-width px-[24px]" style="width: 100%;">
+                <mat-label>Fecha</mat-label>
+
+                <input formControlName='start' type="date" id="date" matInput>
+                <mat-error>Es requerido</mat-error>
+            </mat-form-field>
+        </form>
+
+
+
+
+        <mat-form-field class="example-full-width px-[24px]" style="width: 100%;">
+            <mat-label>Proyecto</mat-label>
+            <input [(ngModel)]="client" [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. Perez"
+                maxLength="200"
+                oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                onkeypress="return ' QWERTYUIOPÑLKJHGFDSAZXCVBNMáéíóúabcdefghijklmnñopqrstuvwxyz1234567890'.includes(event.key)"
+                required>
+        </mat-form-field>
+
+
+
+        <mat-form-field class="example-full-width px-[24px]" style="width: 100%;">
+            <mat-label style="color: #1e293b">Dirección</mat-label>
+            <input [(ngModel)]="direction" [ngModelOptions]="{standalone: true}" matInput style="color: #1e293b"
+                placeholder="Ex. MarcoPerez" type="text" maxlength="300"
+                oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                required>
+        </mat-form-field>
+
+        <mat-label class="px-[24px]">Vehículo *</mat-label>
+        <div class="ng-autocomplete example-full-width px-[24px]">
+            <ng-autocomplete [data]="vehiculo" [searchKeyword]="keyword"
+                [placeholder]="driver? driver: 'Seleccione su vehiculo'" (selected)='selectEventDriver($event)'
+                (inputChanged)='onChangeSearch($event)' (inputFocused)='onFocused($event)' [itemTemplate]="itemTemplate"
+                [notFoundTemplate]="notFoundTemplate">
+            </ng-autocomplete>
+
+            <ng-template #itemTemplate let-item>
+                <a [innerHTML]="item.tipo"></a>
+            </ng-template>
+
+            <ng-template #notFoundTemplate let-notFound>
+                <div [innerHTML]="notFound"></div>
+            </ng-template>
+        </div>
+        <!--<mat-form-field class="example-full-width px-[24px]" style="width: 100%;" >
+            <mat-label style="color: #1e293b">Vehículo</mat-label>
+            <select name="vehiculo">
+                <option value="value1">Value 1</option>
+                <option value="value2" selected>Value 2</option>
+                <option value="value3">Value 3</option>
+            </select>
+        </mat-form-field> -->
+        <mat-form-field class="example-full-width px-[24px]" style="width: 100%;">
+            <mat-label>m2</mat-label>
+            <input [(ngModel)]="m2" [ngModelOptions]="{standalone: true}" matInput style="color: #1e293b"
+                placeholder="1" type="number" autofocus required>
+
+        </mat-form-field>
+
+
+        <mat-label class="px-[24px]">Resistencia *</mat-label>
+
+        <div class="ng-autocomplete example-full-width px-[24px]">
+            <ng-autocomplete [data]="mpab" [searchKeyword]="keyword" [placeholder]="mpa? mpa: ''"
+                (selected)='selectEventResistencia($event)' (inputChanged)='onChangeSearch($event)'
+                (inputFocused)='onFocused($event)' [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
+            </ng-autocomplete>
+
+            <ng-template #itemTemplate let-item>
+                <a [innerHTML]="item.tipo"></a>
+            </ng-template>
+
+            <ng-template #notFoundTemplate let-notFound>
+                <div [innerHTML]="notFound"></div>
+            </ng-template>
+        </div>
+
+
+        <!--<mat-form-field class="example-full-width px-[24px]" style="width: 100%;">
+            <mat-label>Mpa</mat-label>
+            <select name="vehiculo">
+                <option value="12" selected>12</option>
+                <option value="20" >20</option>
+            </select>
+
+        </mat-form-field>-->
+
+
+
+
+        <mat-label class="px-[24px]">Morteros *</mat-label>
+
+        <div class="ng-autocomplete example-full-width px-[24px]">
+            <textarea [ngModelOptions]="{standalone: true}" [(ngModel)]="morterosCat" style="
+            width: 100%;
+            border: 1px solid #b1b1b1;
+        "></textarea>
+        </div>
+
+
+        <!--<mat-form-field class="example-full-width px-[24px]" style="width: 100%;">
+            <mat-label>Morteros Categoría</mat-label>
+            <select name="morterosCat">
+                <option value="value1" selected>12</option>
+                <option value="value2" >20</option>
+            </select>
+
+        </mat-form-field>-->
+
+
+
+
+        <mat-checkbox (change)="checkCheckBoxvalue($event)" [checked]="dinteles" class="example-full-width px-[24px]"
+            required>
+            <mat-label>Dinteles</mat-label>
+
+            <mat-label *ngIf="dinteles === true" class="example-full-width px-[24px]">Estado Activo</mat-label>
+            <mat-label *ngIf="dinteles === false" class="example-full-width px-[24px]">Estado Desactivado</mat-label>
+        </mat-checkbox>
+
+
+
+
+        <div class="ng-autocomplete example-full-width px-[24px]">
+            <mat-label class="px-[24px]">Estado *</mat-label>
+            <ng-autocomplete [data]="estados" [searchKeyword]="keyword" [placeholder]="status? status: ''"
+                (selected)='selectEventStado($event)' (inputChanged)='onChangeSearch($event)'
+                (inputFocused)='onFocused($event)' [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
+            </ng-autocomplete>
+
+            <ng-template #itemTemplate let-item>
+                <a [innerHTML]="item.tipo"></a>
+            </ng-template>
+
+            <ng-template #notFoundTemplate let-notFound>
+                <div [innerHTML]="notFound"></div>
+            </ng-template>
+        </div>
+
+
+        <mat-checkbox (change)="checkCheckBoxvalueBc($event)" [checked]="newBloc" class="example-full-width px-[24px]"
+            required>
+            <mat-label>Bloque</mat-label>
+
+            <mat-label *ngIf="newBloc === true" class="example-full-width px-[24px]"> Nuevo</mat-label>
+            <mat-label *ngIf="newBloc === false" class="example-full-width px-[24px]"> Antiguo</mat-label>
+        </mat-checkbox>
+
+
+
+
+        <div class="grid grid-cols-1 gap-2 py-[16px] px-[24px]">
+            <div>
+                <button (click)="guardarRegion()" class="btn4 bg-white text-black dark:text-black "
+                    style="width: 100%; text-align: end;">{{botton}}
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

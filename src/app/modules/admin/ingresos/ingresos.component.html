@@ -1,0 +1,251 @@
+<div class="absolute inset-0 flex flex-col flex-auto w-full min-w-0 overflow-hidden">
+  <div class="flex flex-wrap w-full max-w-screen-xl mx-auto p-6 md:p-8 " style="
+          overflow-y: auto !important; ">
+
+    <!-- Title and action buttons -->
+    <div class="flex items-center justify-between w-full">
+      <div>
+        <div class="text-3xl font-semibold tracking-tight leading-8">Bitacora Notas de Despacho</div>
+        <!--<div class="font-medium tracking-tight text-secondary">Monitor de información:</div>-->
+      </div>
+    </div>
+
+    <div class="flex flex-col flex-auto min-w-0">
+
+
+      <!-- Main -->
+      <div class="flex-auto border-t -mt-px pt-4 sm:pt-6">
+        <div class="w-full max-w-screen-xl mx-auto">
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full mt-8">
+            <!-- Visitors overview -->
+            <div
+              class="sm:col-span-2 lg:col-span-3  flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden">
+              <div class="flex flex-col flex-auto" style="
+                                        display: flex;
+                                        justify-content: center;
+                                        align-items: center;
+                                    ">
+                <div class="flex flex-auto overflow-hidden" style="overflow: auto !important;    width: 90%;
+                    ">
+
+                  <!-- Products list -->
+                  <div class="flex flex-col flex-auto sm:mb-18 overflow-hidden sm:overflow-y-auto"
+                    style="overflow: auto !important;">
+
+                    <!---desde aquiiiii-->
+
+
+                    <div class=" mat-elevation-z8" style="text-align: center;">
+
+                      <!------------------------------------------------TABLA 1------------------------------------------------------------------------->
+                      <table mat-table [dataSource]="mampuesto$" class=" example-container mat-elevation-z8" matSort
+                        style="width: 100%;text-align: center;">
+
+
+                        <!-- Name Column -->
+                        <ng-container matColumnDef="cliente">
+                          <th mat-header-cell *matHeaderCellDef style="text-align: center;" mat-sort-header>
+                            Cliente
+                          </th>
+                          <td mat-cell *matCellDef="let element"> {{element.cliente}} </td>
+                          <td mat-footer-cell *matFooterCellDef> </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="observaciones">
+                          <th mat-header-cell *matHeaderCellDef style="text-align: center;" mat-sort-header>
+                            Observaciones</th>
+                          <td mat-cell *matCellDef="let element"
+                            style="text-align: justify;padding-left: 3% !important;">
+                            {{element.observaciones }} </td>
+                          <td mat-footer-cell *matFooterCellDef> </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="avisoCliente">
+                          <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Aviso Cliente</th>
+                          <td mat-cell *matCellDef="let element">{{element.avisoCliente}}
+                          </td>
+                          <td mat-footer-cell *matFooterCellDef> </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="revisado">
+                          <th mat-header-cell *matHeaderCellDef style="text-align: center;">Revisado</th>
+                          <td mat-cell *matCellDef="let element"> {{element.revisado}}
+                          </td>
+                          <td mat-footer-cell *matFooterCellDef> </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="estado">
+                          <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Estado</th>
+                          <td mat-cell *matCellDef="let element"> {{element.estado}}
+                          </td>
+                        </ng-container>
+
+                          <ng-container matColumnDef="guia">
+                              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Guia</th>
+                              <td mat-cell *matCellDef="let element"> {{element.guia}}
+                              </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="factura">
+                              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Factura</th>
+                              <td mat-cell *matCellDef="let element"> {{element.factura}}
+                              </td>
+                          </ng-container>
+                          <ng-container matColumnDef="ubicacion">
+                              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Ubicación</th>
+                              <td mat-cell *matCellDef="let element"> {{element.ubicacion}}
+                              </td>
+                          </ng-container>
+                          <ng-container matColumnDef="proyecto">
+                              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Proyecto</th>
+                              <td mat-cell *matCellDef="let element"> {{element.proyecto}}
+                              </td>
+                          </ng-container>
+                          <ng-container matColumnDef="fecha">
+                              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Fecha</th>
+                              <td mat-cell *matCellDef="let element"> {{element.fecha}}
+                              </td>
+                          </ng-container>
+                          <ng-container matColumnDef="observaciones1">
+                              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Observaciones</th>
+                              <td mat-cell *matCellDef="let element"> {{element.observaciones1}}
+                              </td>
+                          </ng-container>
+                          <ng-container matColumnDef="oneducto">
+                              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> 1 Ducto</th>
+                              <td mat-cell *matCellDef="let element"> {{element.oneducto}}
+                              </td>
+                          </ng-container>
+                          <ng-container matColumnDef="cajetin">
+                              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Cajetin</th>
+                              <td mat-cell *matCellDef="let element"> {{element.cajetin}}
+                              </td>
+                          </ng-container>
+                          <ng-container matColumnDef="twoductos">
+                              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> 2 Ductos</th>
+                              <td mat-cell *matCellDef="let element"> {{element.twoductos}}
+                              </td>
+                          </ng-container>
+                          <ng-container matColumnDef="mixto">
+                              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Mixto</th>
+                              <td mat-cell *matCellDef="let element"> {{element.mixto}}
+                              </td>
+                          </ng-container>
+                          <ng-container matColumnDef="tresductos">
+                              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> 3 Ductos</th>
+                              <td mat-cell *matCellDef="let element"> {{element.tresductos}}
+                              </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="maestra">
+                              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Maestra</th>
+                              <td mat-cell *matCellDef="let element"> {{element.maestra}}
+                              </td>
+                          </ng-container>
+                          <ng-container matColumnDef="doce">
+                              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> 12</th>
+                              <td mat-cell *matCellDef="let element"> {{element.doce}}
+                              </td>
+                          </ng-container>
+                          <ng-container matColumnDef="veinte">
+                              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> 20</th>
+                              <td mat-cell *matCellDef="let element"> {{element.veinte}}
+                              </td>
+                          </ng-container>
+                          <ng-container matColumnDef="groutnivelacion">
+                              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Grout Nivelación</th>
+                              <td mat-cell *matCellDef="let element"> {{element.groutnivelacion}}
+                              </td>
+                          </ng-container>
+                          <ng-container matColumnDef="groutestandar">
+                              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Grout Estandar</th>
+                              <td mat-cell *matCellDef="let element"> {{element.groutestandar}}
+                              </td>
+                          </ng-container>
+                          <ng-container matColumnDef="groutplus">
+                              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Grout Plus</th>
+                              <td mat-cell *matCellDef="let element"> {{element.groutplus}}
+                              </td>
+                          </ng-container>
+                          <ng-container matColumnDef="sealestandar">
+                              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Seal Estandar</th>
+                              <td mat-cell *matCellDef="let element"> {{element.sealestandar}}
+                              </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="sealplus">
+                              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Seal Plus</th>
+                              <td mat-cell *matCellDef="let element"> {{element.sealplus}}
+                              </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="finish">
+                              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Finish</th>
+                              <td mat-cell *matCellDef="let element"> {{element.finish}}
+                              </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="deko">
+                              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Deko</th>
+                              <td mat-cell *matCellDef="let element"> {{element.deko}}
+                              </td>
+                          </ng-container>
+                          <ng-container matColumnDef="protector">
+                              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Protector</th>
+                              <td mat-cell *matCellDef="let element"> {{element.protector}}
+                              </td>
+                          </ng-container>
+                          <ng-container matColumnDef="dintel">
+                              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Dintel</th>
+                              <td mat-cell *matCellDef="let element"> {{element.dintel}}
+                              </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="peso">
+                              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Peso</th>
+                              <td mat-cell *matCellDef="let element"> {{element.peso}}
+                              </td>
+                          </ng-container>
+                          <ng-container matColumnDef="totalPalets">
+                              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Total Palets</th>
+                              <td mat-cell *matCellDef="let element"> {{element.totalPalets}}
+                              </td>
+                          </ng-container>
+                          <ng-container matColumnDef="totalMorteros">
+                              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Total Morteros</th>
+                              <td mat-cell *matCellDef="let element"> {{element.totalMorteros}}
+                              </td>
+                          </ng-container>
+                          <ng-container matColumnDef="transporte">
+                              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Transporte</th>
+                              <td mat-cell *matCellDef="let element"> {{element.transporte}}
+                              </td>
+                          </ng-container>
+                        <tr mat-header-row *matHeaderRowDef="displayedColumnsMampuesto"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumnsMampuesto;"></tr>
+                      </table>
+
+
+                      <ng-template #noProducts>
+                        <div class="p-8 sm:p-16 border-t text-4xl font-semibold tracking-tight text-center">No
+                          tienes Ingredientes!
+                        </div>
+                      </ng-template>
+
+
+
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

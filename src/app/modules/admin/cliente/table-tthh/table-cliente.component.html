@@ -1,0 +1,91 @@
+<!-- No courses -->
+<ng-template #noCourses>
+    <div class="flex flex-auto flex-col items-center justify-center bg-gray-100 dark:bg-transparent">
+        <mat-icon class="icon-size-20" [svgIcon]="'iconsmind:file_search'"></mat-icon>
+        <div class="mt-6 text-2xl font-semibold tracking-tight text-secondary">No existen clientes!</div>
+    </div>
+</ng-template>
+
+
+<div class="flex flex-col flex-auto w-full max-w-xs sm:max-w-5xl mx-auto">
+
+    <ng-container *ngIf="this.masterName.length; else noCourses">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-8 sm:mt-10">
+            <ng-container *ngFor="let course of masterName; trackBy: trackByFn">
+                <!-- Course -->
+                <div class="flex flex-col  shadow rounded-2xl border border-blue-950 overflow-hidden bg-card">
+                    <div class="flex flex-col p-6" [routerLink]="['./setting/', course._id]">
+                        <div class="flex items-center justify-between">
+                            <!-- Course category -->
+                            <ng-container *ngIf="course.active">
+                                <div class="py-0.5 px-3 rounded-full text-sm font-semibold"
+                                     [ngClass]="{'text-blue-800 bg-blue-100 dark:text-blue-50 dark:bg-blue-500': course.active === true,
+
+                                                            'text-red-800 bg-red-100 dark:text-red-50 dark:bg-red-500': course.active === false}">
+                                    <div *ngIf="course.active===true">Activado</div>
+                                    <div *ngIf="course.active!=true">Desactivado</div>
+                                </div>
+                            </ng-container>
+                            <!-- Completed at least once -->
+                            <div class=" h-30 flex items-center">
+                            </div>
+                        </div>
+                        <!-- Course title & description -->
+                        <div class="justify-center pl-[30%] text-center">
+                            <img onerror="this.onerror=null;this.src='../assets/images/avatars/render.png';"class=" w-32 h-32 rounded-full ring-4" [src]="course.picture"
+                                 onerror="this.onerror=null;this.src='../assets/images/avatars/images.jpeg';"
+                                 alt="Cover image"/>
+
+                        </div>
+                        <div class="mt-4 text-[20px] font-medium">{{ course.name }} {{ course.lastName }}</div>
+                        <div class="mt-0.5 line-clamp-2 text-secondary"><b>Telefono:</b> {{ course.phone }}</div>
+                        <div class="mt-0.5 line-clamp-2 text-secondary"><b>Ruc:</b> {{ course.ruc }}</div>
+
+                    </div>
+                    <!-- Footer -->
+                    <div class="flex flex-col w-full mt-auto">
+                        <!-- Course progress -->
+                        <div class="relative h-0.5">
+                            <div class="z-10 absolute inset-x-0 -mt-3" [matTooltip]="1 | percent"
+                                 [matTooltipPosition]="'above'" [matTooltipClass]="'-mb-0.5'"></div>
+                            <mat-progress-bar class="h-0.5" [value]="(100 * 1 / 1)"></mat-progress-bar>
+                        </div>
+
+                        <!-- Course launch button -->
+                        <div class=" py-4 text-right bg-rose-500 dark:bg-transparent">
+                            <div class="flex justify-center gap-1">
+                                <button mat-stroked-button (click)="openDialog(course)"
+                                        class="content-center px-2" matTooltip="Editar" style="margin-right: 5px;">
+                                        <p class="w-24 text-white uppercase text-xs">Editar</p>
+                                    <mat-icon class="ml-1.5 text-white icon-size-5"
+                                              [svgIcon]="'heroicons_solid:pencil-square'"></mat-icon>
+                                </button>
+
+                                <button mat-stroked-button class=" content-center px-2"
+                                        [routerLink]="['/academy/', course.ruc]"
+                                        matTooltip="Listado de Proyectos"
+                                        style="margin-right: 5px;">
+                                        <p class="w-26 text-white uppercase text-xs">Lista de proyectos</p>
+                                    <mat-icon class="ml-1.5 text-white icon-size-5"
+                                              [svgIcon]="'heroicons_solid:home-modern'"></mat-icon>
+                                </button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </ng-container>
+
+    <!-- No courses -->
+    <ng-template #noCourses>
+        <div class="flex flex-auto flex-col items-center justify-center bg-gray-100 dark:bg-transparent">
+            <mat-icon class="icon-size-24" [svgIcon]="'heroicons_outline:document-search'"></mat-icon>
+            <div class="mt-6 text-2xl font-semibold tracking-tight text-secondary">No se encontro ninguna casa ni
+                proyecto asigando a tu cuenta!
+            </div>
+        </div>
+    </ng-template>
+</div>
+

@@ -1,0 +1,1008 @@
+<div class="flex flex-col flex-auto min-w-0">
+
+    <!-- Header -->
+    <div class="bg-card">
+        <div class="flex flex-col w-full max-w-screen-xl mx-auto px-6 sm:px-8">
+        </div>
+    </div>
+
+    <!-- Main -->
+    <div class="flex-auto border-t -mt-px pt-4 sm:pt-6">
+        <div class="w-full max-w-screen-xl mx-auto">
+            <!-- Tabs -->
+            <mat-tab-group class="sm:px-2" mat-stretch-tabs="false" [animationDuration]="'0'">
+
+                <!-- Home -->
+                <mat-tab label="Stock Actual">
+                    <ng-template matTabContent>
+
+                        <mat-tab-group class="sm:px-2" mat-stretch-tabs="false" [animationDuration]="'0'">
+
+                            <mat-tab label="Mampuesto">
+                                <ng-template matTabContent>
+                                    <!--<div
+                                        class="sm:col-span-2 lg:col-span-3  flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden m-3">
+                                        <div class="flex items-center justify-between mt-10 ml-10 mr-6 sm:mr-10">
+                                            <div class="flex flex-col">
+                                                <div
+                                                    class="mr-4 text-2xl md:text-3xl font-semibold tracking-tight leading-7">
+                                                    Mampuesto Antiguo Sin Bisel
+                                                </div>
+                                                <div class="font-medium text-secondary">Resultados</div>
+                                            </div>
+                                        </div>
+                                        <div class="flex flex-col flex-auto" style="
+                                                              display: flex;
+                                                              justify-content: center;
+                                                              align-items: center;
+                                                          ">
+                                            <div class="flex flex-auto overflow-hidden" style="overflow: auto !important;    width: 90%;
+                                          ">
+
+                                                
+                                                <div class="flex flex-col flex-auto sm:mb-18 overflow-hidden sm:overflow-y-auto"
+                                                    style="overflow: auto !important;">
+
+                                                    
+
+                                                    <div class=" mat-elevation-z8" style="text-align: center;">
+                                                        <div class=" gap-6 w-full min-w-0">
+                                                            <table mat-table [dataSource]="dataTable"
+                                                                class="mat-elevation-z8">
+                                                                @for (column of displayedColumns; track column) {
+                                                                <ng-container [matColumnDef]="column">
+                                                                    <th mat-header-cell *matHeaderCellDef
+                                                                        style="text-align: center;">
+
+                                                                        <span *ngIf="column === 'Ducto1'">1 </span>
+                                                                        <span *ngIf="column === 'H/M'">Nuevos</span>
+                                                                        <span *ngIf="column === 'Doble'">Dos
+                                                                            Ductos</span>
+                                                                        <span
+                                                                            *ngIf="column !== 'Ducto2' && column !== 'H/M'&& column !== 'Ducto1'">{{column}}</span>
+                                                                    </th>
+                                                                    <td mat-cell *matCellDef="let element"
+                                                                        style="text-align: center;">
+                                                                        <span
+                                                                            *ngIf="column === 'TIPO'">{{element[column]?.valor}}</span>
+                                                                        <div *ngIf="column !== 'TIPO' && element[column]?.valor"
+                                                                            class="flex flex-col flex-auto p-6 bg-card rounded-2xl overflow-hidden">
+
+                                                                            <div
+                                                                                class="flex flex-col items-center mt-2">
+                                                                                <div class="text-5xl font-bold tracking-tight leading-none "
+                                                                                    [ngStyle]="(element[column]?.valor <= 5 && {'color': 'red'}) || (element[column]?.valor >=6 && element[column]?.valor  <=9 &&  {'color': 'blue'}) || (element[column]?.valor >= 10  && {'color': 'green'})">
+                                                                                    {{element[column]?.valor}}</div>
+                                                                            </div>
+                                                                        </div>
+
+
+                                                                    </td>
+                                                                </ng-container>
+                                                                }
+
+                                                                <tr mat-header-row *matHeaderRowDef="columnsToDisplay">
+                                                                </tr>
+                                                                <tr mat-row
+                                                                    *matRowDef="let row; columns: columnsToDisplay;">
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div
+                                        class="sm:col-span-2 lg:col-span-3  flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden m-3">
+                                        <div class="flex items-center justify-between mt-10 ml-10 mr-6 sm:mr-10">
+                                            <div class="flex flex-col">
+                                                <div
+                                                    class="mr-4 text-2xl md:text-3xl font-semibold tracking-tight leading-7">
+                                                    Mampuesto Nuevo
+                                                </div>
+                                                <div class="font-medium text-secondary">Resultados</div>
+                                            </div>
+                                        </div>
+                                        <div class="flex flex-col flex-auto" style="
+                                                          display: flex;
+                                                          justify-content: center;
+                                                          align-items: center;
+                                                      ">
+                                            <div class="flex flex-auto overflow-hidden" style="overflow: auto !important;    width: 90%;
+                                      ">
+
+                                                
+                                                <div class="flex flex-col flex-auto sm:mb-18 overflow-hidden sm:overflow-y-auto"
+                                                    style="overflow: auto !important;">
+
+                                                    
+
+                                                    <div class=" mat-elevation-z8" style="text-align: center;">
+
+                                                        <div class=" gap-6 w-full min-w-0">
+                                                            <table mat-table [dataSource]="dataTable3"
+                                                                class="mat-elevation-z8">
+                                                                @for (column of displayedColumns3; track column) {
+                                                                <ng-container [matColumnDef]="column">
+                                                                    <th mat-header-cell *matHeaderCellDef
+                                                                        style="text-align: center;">
+
+                                                                        <span *ngIf="column === '6'">1 </span>
+                                                                        <span *ngIf="column === 'H/M'">Nuevos</span>
+                                                                        <span *ngIf="column === 'Doble'">Dos
+                                                                            Ductos</span>
+                                                                        <span
+                                                                            *ngIf="column !== 'Doble' && column !== 'H/M'&& column !== '6'">{{column}}</span>
+                                                                    </th>
+                                                                    <td mat-cell *matCellDef="let element"
+                                                                        style="text-align: center;">
+                                                                        <span
+                                                                            *ngIf="column === 'TIPO'">{{element[column]?.valor}}</span>
+                                                                        <div *ngIf="column !== 'TIPO' && element[column]?.valor"
+                                                                            class="flex flex-col flex-auto p-6 bg-card rounded-2xl overflow-hidden">
+
+                                                                            <div
+                                                                                class="flex flex-col items-center mt-2">
+                                                                                <div class="text-5xl font-bold tracking-tight leading-none "
+                                                                                    [ngStyle]="(element[column]?.valor <= 5 && {'color': 'red'}) || (element[column]?.valor >=6 && element[column]?.valor  <=9 &&  {'color': 'blue'}) || (element[column]?.valor >= 10  && {'color': 'green'})">
+                                                                                    {{element[column]?.valor}}</div>
+                                                                            </div>
+                                                                        </div>
+
+
+                                                                    </td>
+                                                                </ng-container>
+                                                                }
+
+                                                                <tr mat-header-row *matHeaderRowDef="columnsToDisplay3">
+                                                                </tr>
+                                                                <tr mat-row
+                                                                    *matRowDef="let row; columns: columnsToDisplay3;">
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+
+
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div
+                                        class="sm:col-span-2 lg:col-span-3  flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden  m-3">
+                                        <div class="flex items-center justify-between mt-10 ml-10 mr-6 sm:mr-10">
+                                            <div class="flex flex-col">
+                                                <div
+                                                    class="mr-4 text-2xl md:text-3xl font-semibold tracking-tight leading-7">
+                                                    Mampuesto Antiguo Con Bisel
+                                                </div>
+                                                <div class="font-medium text-secondary">Resultados</div>
+                                            </div>
+                                        </div>
+                                        <div class="flex flex-col flex-auto" style="
+                                                              display: flex;
+                                                              justify-content: center;
+                                                              align-items: center;
+                                                          ">
+                                            <div class="flex flex-auto overflow-hidden" style="overflow: auto !important;    width: 90%;
+                                          ">
+
+                                                
+                                                <div class="flex flex-col flex-auto sm:mb-18 overflow-hidden sm:overflow-y-auto"
+                                                    style="overflow: auto !important;">
+
+                                                    
+
+                                                    <div class=" mat-elevation-z8" style="text-align: center;">
+
+                                                        <div class=" gap-6 w-full min-w-0">
+                                                            <table mat-table [dataSource]="dataTable2"
+                                                                class="mat-elevation-z8">
+                                                                @for (column of displayedColumns2; track column) {
+                                                                <ng-container [matColumnDef]="column">
+                                                                    <th mat-header-cell *matHeaderCellDef
+                                                                        style="text-align: center;">
+
+                                                                        <span *ngIf="column === 'Ducto1'">1 </span>
+                                                                        <span *ngIf="column === 'Ducto4'">Nuevos</span>
+                                                                        <span *ngIf="column === 'Ducto2'">Dos
+                                                                            Ductos</span>
+                                                                        <span
+                                                                            *ngIf="column !== 'Doble' && column !== 'H/M'&& column !== '6'">{{column}}</span>
+                                                                    </th>
+                                                                    <td mat-cell *matCellDef="let element"
+                                                                        style="text-align: center;">
+                                                                        <span
+                                                                            *ngIf="column === 'TIPO'">{{element[column]?.valor}}</span>
+                                                                        <div *ngIf="column !== 'TIPO' && element[column]?.valor"
+                                                                            class="flex flex-col flex-auto p-6 bg-card rounded-2xl overflow-hidden">
+
+                                                                            <div
+                                                                                class="flex flex-col items-center mt-2">
+                                                                                <div class="text-5xl font-bold tracking-tight leading-none "
+                                                                                    [ngStyle]="(element[column]?.valor <= 5 && {'color': 'red'}) || (element[column]?.valor >=6 && element[column]?.valor  <=9 &&  {'color': 'blue'}) || (element[column]?.valor >= 10  && {'color': 'green'})">
+                                                                                    {{element[column]?.valor}}</div>
+                                                                            </div>
+                                                                        </div>
+
+
+                                                                    </td>
+                                                                </ng-container>
+                                                                }
+
+                                                                <tr mat-header-row *matHeaderRowDef="columnsToDisplay2">
+                                                                </tr>
+                                                                <tr mat-row
+                                                                    *matRowDef="let row; columns: columnsToDisplay2;">
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+
+
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>-->
+
+                                    <!-- DE 12-->
+                                    <div
+                                        class="sm:col-span-2 lg:col-span-3  flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden m-3">
+                                        <div class="flex items-center justify-between mt-10 ml-10 mr-6 sm:mr-10">
+                                            <div class="flex flex-col">
+                                                <div
+                                                    class="mr-4 text-2xl md:text-3xl font-semibold tracking-tight leading-7">
+                                                    Mampuesto 12 MPA
+                                                </div>
+                                                <div class="font-medium text-secondary">Resultados</div>
+                                            </div>
+                                        </div>
+                                        <div class="flex flex-col flex-auto" style="
+                                                          display: flex;
+                                                          justify-content: center;
+                                                          align-items: center;
+                                                      ">
+                                            <div class="flex flex-auto overflow-hidden" style="overflow: auto !important;    width: 90%;
+                                      ">
+
+                                                <!-- Products list -->
+                                                <div class="flex flex-col flex-auto sm:mb-18 overflow-hidden sm:overflow-y-auto"
+                                                    style="overflow: auto !important;">
+
+                                                    <!---desde aquiiiii-->
+
+                                                    <div class=" mat-elevation-z8" style="text-align: center;">
+                                                        <div class=" gap-6 w-full min-w-0">
+                                                            <table mat-table [dataSource]="dataTable12"
+                                                                class="mat-elevation-z8">
+                                                                @for (column of displayedColumns12; track column) {
+                                                                <ng-container [matColumnDef]="column">
+                                                                    <th mat-header-cell *matHeaderCellDef
+                                                                        style="text-align: center;">
+
+                                                                        <span *ngIf="column === 'Ducto1'">1 </span>
+                                                                        <span *ngIf="column === 'H/M'">Nuevos</span>
+                                                                        <span *ngIf="column === 'Doble'">Dos
+                                                                            Ductos</span>
+                                                                        <span
+                                                                            *ngIf="column !== 'Ducto2' && column !== 'H/M'&& column !== 'Ducto1'">{{column}}</span>
+                                                                    </th>
+                                                                    <td mat-cell *matCellDef="let element"
+                                                                        style="text-align: center;">
+                                                                        <span
+                                                                            *ngIf="column === 'TIPO' && !element['TIPO'].valor.includes('Total Mampuestos')">{{element[column]?.valor}}</span>
+                                                                        <span
+                                                                            *ngIf="column === 'TIPO' && element['TIPO'].valor.includes('Total Mampuestos')"
+                                                                            style="font-weight: 700;">{{element[column]?.valor}}</span>
+                                                                        <div *ngIf="column !== 'TIPO'"
+                                                                            class="flex flex-col flex-auto p-6 bg-card rounded-2xl overflow-hidden">
+
+                                                                            <div
+                                                                                class="flex flex-col items-center mt-2">
+                                                                                <div class="text-5xl font-bold tracking-tight leading-none "
+                                                                                    *ngIf="!element['TIPO'].valor.includes('Total Mampuestos')"
+                                                                                    [ngStyle]="(element[column]?.valor <= 5 && {'color': 'red'}) || (element[column]?.valor >=6 && element[column]?.valor  <=9 &&  {'color': 'blue'}) || (element[column]?.valor >= 10  && {'color': 'green'})">
+                                                                                    {{ element[column]?.valor }}
+
+
+
+                                                                                </div>
+
+                                                                                <div class="text-5xl font-bold tracking-tight leading-none "
+                                                                                    *ngIf="element['TIPO'].valor.includes('Total Mampuestos')"
+                                                                                    style="color: black;">
+
+
+                                                                                    <span
+                                                                                        *ngIf="element[column]?.valor > 0">{{element[column]?.valor
+                                                                                        }}</span>
+                                                                                    <span
+                                                                                        *ngIf="element[column]?.valor === 0">-</span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+
+                                                                    </td>
+                                                                </ng-container>
+                                                                }
+
+                                                                <tr mat-header-row
+                                                                    *matHeaderRowDef="columnsToDisplay12">
+                                                                </tr>
+                                                                <tr mat-row
+                                                                    *matRowDef="let row; columns: columnsToDisplay12;"
+                                                                    [ngStyle]="row['TIPO'].valor.includes('Total Mampuestos') && {'border-top': '3px solid black'}">
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+
+
+
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!---FIN 12-->
+
+                                    <!--DE 20-->
+
+                                    <div
+                                        class="sm:col-span-2 lg:col-span-3  flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden m-3">
+                                        <div class="flex items-center justify-between mt-10 ml-10 mr-6 sm:mr-10">
+                                            <div class="flex flex-col">
+                                                <div
+                                                    class="mr-4 text-2xl md:text-3xl font-semibold tracking-tight leading-7">
+                                                    Mampuesto 20 MPA
+                                                </div>
+                                                <div class="font-medium text-secondary">Resultados</div>
+                                            </div>
+                                        </div>
+                                        <div class="flex flex-col flex-auto" style="
+                                                          display: flex;
+                                                          justify-content: center;
+                                                          align-items: center;
+                                                      ">
+                                            <div class="flex flex-auto overflow-hidden" style="overflow: auto !important;    width: 90%;
+                                      ">
+
+                                                <!-- Products list -->
+                                                <div class="flex flex-col flex-auto sm:mb-18 overflow-hidden sm:overflow-y-auto"
+                                                    style="overflow: auto !important;">
+
+                                                    <!---desde aquiiiii-->
+
+                                                    <div class=" mat-elevation-z8" style="text-align: center;">
+                                                        <div class=" gap-6 w-full min-w-0">
+                                                            <table mat-table [dataSource]="dataTable20"
+                                                                class="mat-elevation-z8">
+                                                                @for (column of displayedColumns20; track column) {
+                                                                <ng-container [matColumnDef]="column">
+                                                                    <th mat-header-cell *matHeaderCellDef
+                                                                        style="text-align: center;">
+
+                                                                        <span *ngIf="column === 'Ducto1'">1 </span>
+                                                                        <span *ngIf="column === 'H/M'">Nuevos</span>
+                                                                        <span *ngIf="column === 'Doble'">Dos
+                                                                            Ductos</span>
+                                                                        <span
+                                                                            *ngIf="column !== 'Ducto2' && column !== 'H/M'&& column !== 'Ducto1'">{{column}}</span>
+                                                                    </th>
+                                                                    <td mat-cell *matCellDef="let element"
+                                                                        style="text-align: center;">
+                                                                        <span
+                                                                            *ngIf="column === 'TIPO' && !element['TIPO'].valor.includes('Total Mampuestos')">{{element[column]?.valor}}</span>
+                                                                        <span
+                                                                            *ngIf="column === 'TIPO' && element['TIPO'].valor.includes('Total Mampuestos')"
+                                                                            style="font-weight: 700;">{{element[column]?.valor}}</span>
+                                                                        <div *ngIf="column !== 'TIPO'"
+                                                                            class="flex flex-col flex-auto p-6 bg-card rounded-2xl overflow-hidden">
+
+                                                                            <div
+                                                                                class="flex flex-col items-center mt-2">
+                                                                                <div class="text-5xl font-bold tracking-tight leading-none "
+                                                                                    *ngIf="!element['TIPO'].valor.includes('Total Mampuestos')"
+                                                                                    [ngStyle]="(element[column]?.valor <= 5 && {'color': 'red'}) || (element[column]?.valor >=6 && element[column]?.valor  <=9 &&  {'color': 'blue'}) || (element[column]?.valor >= 10  && {'color': 'green'})">
+
+                                                                                    {{ element[column]?.valor }}
+                                                                                </div>
+
+                                                                                <div class="text-5xl font-bold tracking-tight leading-none "
+                                                                                    *ngIf="element['TIPO'].valor.includes('Total Mampuestos')"
+                                                                                    style="color: black;">
+
+
+                                                                                    <span
+                                                                                        *ngIf="element[column]?.valor > 0">{{element[column]?.valor
+                                                                                        }}</span>
+                                                                                    <span
+                                                                                        *ngIf="element[column]?.valor === 0">-</span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+
+                                                                    </td>
+                                                                </ng-container>
+                                                                }
+
+                                                                <tr mat-header-row
+                                                                    *matHeaderRowDef="columnsToDisplay20">
+                                                                </tr>
+                                                                <tr mat-row
+                                                                    *matRowDef="let row; columns: columnsToDisplay20;"
+                                                                    [ngStyle]="row['TIPO'].valor.includes('Total Mampuestos') && {'border-top': '3px solid black'}">
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+
+
+
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--FIN 20-->
+
+
+                                    <!-----------------------------------------FIN----------------------------------------->
+                                    <!--</div>-->
+
+                                </ng-template>
+                            </mat-tab>
+
+                            <mat-tab label="Morteros">
+                                <ng-template matTabContent>
+
+                                    <div class=" gap-6 w-full min-w-0">
+                                        <table mat-table [dataSource]="dataTableMorteros" class="mat-elevation-z8">
+                                            @for (column of displayedColumnsMorteros; track column) {
+                                            <ng-container [matColumnDef]="column">
+                                                <th mat-header-cell *matHeaderCellDef style="text-align: center;">
+                                                    <span *ngIf="column === 'total'">Sacos Totales </span>
+                                                    <span *ngIf="column === 'palets'">Palets (60 sacos) </span>
+                                                    <span *ngIf="column === 'TIPO'">Tipo </span>
+                                                </th>
+                                                <td mat-cell *matCellDef="let element" style="text-align: center;">
+                                                    <span *ngIf="column === 'TIPO'">{{element[column]?.valor}}</span>
+                                                    <div *ngIf="column !== 'TIPO' && element[column]?.valor"
+                                                        class="flex flex-col flex-auto p-6 bg-card rounded-2xl overflow-hidden">
+
+                                                        <div class="flex flex-col items-center mt-2">
+                                                            <div class="text-5xl font-bold tracking-tight leading-none "
+                                                                [ngStyle]="(element[column]?.valor <= 60 && {'color': 'black'}) || (element[column]?.valor >=60 && element[column]?.valor  <=120 &&  {'color': 'blue'}) || (element[column]?.valor >= 120  && {'color': 'green'})">
+                                                                {{element[column]?.valor}}</div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </td>
+                                            </ng-container>
+                                            }
+
+                                            <tr mat-header-row *matHeaderRowDef="columnsToDisplayMorteros"></tr>
+                                            <tr mat-row *matRowDef="let row; columns: columnsToDisplayMorteros;">
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <!-----------------------------------------FIN----------------------------------------->
+                                    <!--</div>-->
+
+                                </ng-template>
+                            </mat-tab>
+
+                            <mat-tab label="Dinteles">
+                                <ng-template matTabContent>
+
+                                    <div id="chart">
+                                        <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart"
+                                            [dataLabels]="chartOptions.dataLabels" [stroke]="chartOptions.stroke"
+                                            [colors]="chartOptions.colors" [title]="chartOptions.title"
+                                            [subtitle]="chartOptions.subtitle" [plotOptions]="chartOptions.plotOptions"
+                                            [yaxis]="chartOptions.yaxis" [xaxis]="chartOptions.xaxis"
+                                            [tooltip]="chartOptions.tooltip" [legend]="chartOptions.legend"
+                                            [fill]="chartOptions.fill" [states]="chartOptions.states"></apx-chart>
+                                    </div>
+
+                                    <!-- <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 w-full min-w-0">
+
+                                        <div *ngFor="let item of dataStockDinteles"
+                                            class="sm:col-span-2 md:col-span-4 flex flex-col grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 w-full min-w-0">
+                                            <div
+                                                class="sm:col-span-2 md:col-span-4 flex flex-col text-lg font-medium tracking-tight leading-6 truncate">
+                                                {{item.titulo}}, Total: {{item.total}}</div>
+                                            <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden"
+                                                *ngFor="let data of item.data">
+                                                <div class="flex items-start justify-between">
+                                                    <div class="text-lg font-medium tracking-tight leading-6 truncate">
+                                                        {{data.nombre}}</div>
+                                                </div>
+                                                <div class="flex flex-col items-center mt-2">
+                                                    <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none "
+                                                        [ngStyle]="(data.valor <= 5 && {'color': 'red'}) || (data.valor >=6 && data.valor <=9 &&  {'color': 'blue'}) || (data.valor >= 10  && {'color': 'green'})">
+                                                        {{data.valor}}</div>
+                                                    <div
+                                                        class="flex items-baseline justify-center w-full mt-5 text-secondary">
+                                                        <div class="text-md font-medium truncate">{{data.nombre2}}
+                                                            Centimetros</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div> -->
+
+                                </ng-template>
+                            </mat-tab>
+
+
+
+                        </mat-tab-group>
+
+
+
+                    </ng-template>
+                </mat-tab>
+
+                <mat-tab label="Histórico">
+                    <ng-template matTabContent>
+                        <mat-tab-group class="sm:px-2" mat-stretch-tabs="false" [animationDuration]="'0'">
+                            <mat-tab label="Morteros" (click)="showMorteros()" (click)="cargarDatosStock()">
+                                <button (click)="showMorteros()" (click)="cargarDatosStock()" class="text-2xl font-bold border-b-2 px-2 py-1 hover:opacity-30">Inventario Morteros</button>
+                                <ng-container *ngIf="morterosView">
+                                    <div class="flex flex-col gap-4">
+                                        <div class="w-full flex flex-col gap-2 justify-center items-center bg-white shadow-xl rounded-lg p-4">
+                                            <h2 class="text-center mr-4 text-xl font-black uppercase">Seleccione una Fecha</h2>
+                                            <div class="flex gap-4 justify-center items-center">
+                                                <div class="flex gap-4">
+                                                    <label class="uppercase text-xl font-bold" for="start">Fecha Inicio:</label>
+                                                    <input class="border-2 bg-slate-100 px-4 py-1 rounded-lg" type="date" id="start" value="2024-03-01" min="2024-03-01" max="2024-12-31" (change)="setfechaIncio($event.target.value)">
+                                                </div>
+                                                <div class="flex gap-4">
+                                                    <label class="uppercase text-xl font-bold" for="end">Fecha Fin:</label>
+                                                    <input class="border-2 bg-slate-100 px-4 py-1 rounded-lg" type="date" id="end" value="2024-06-13" min="2024-03-01" max="2024-12-31" (change)="setfechaFin($event.target.value)"/>
+                                                </div>
+                                                <div>
+                                                    <button class="px-4 py-1 text-xl font-bold bg-orange-400 hover:bg-orange-500 rounded-lg text-white" (click)="cargarDatosStock()">Buscar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="container mx-auto w-full">
+                                            <div class="grid grid-col gap-4">
+                                                <div class="flex flex-col gap-2">
+                                                    <div class="flex justify-around items-center bg-white shadow-xl rounded-lg p-2">
+                                                        <div class="flex flex-col justify-center items-center gap-2">
+                                                            <h1 class="text-center font-black text-2xl mt-2 uppercase">Suma total mensual</h1>
+                                                            <div class="grid grid-cols-3 gap-2 shadow-lg rounded-lg bg-slate-100 p-2">
+                                                                <div class="flex flex-col items-center p-4 border-r-2 border-b-2">
+                                                                    <h2 class="text-center font-bold text-xl">Grout Nivelación</h2>
+                                                                    <p class="text-4xl font-black">{{groutNivelacion}} <span class="text-sm opacity-40">Unidad(es)</span></p>
+                                                                </div>
+                                                                <div class="flex flex-col items-center p-4 border-r-2 border-b-2">
+                                                                    <h2 class="text-center font-bold text-xl">Mortero DK</h2>
+                                                                    <p class="text-4xl font-black">{{morteroDK}} <span class="text-sm opacity-40">Unidad(es)</span></p>
+                                                                </div>
+                                                                <div class="flex flex-col items-center p-4 border-b-2">
+                                                                    <h2 class="text-center font-bold text-xl">Grout Estandar</h2>
+                                                                    <p class="text-4xl font-black">{{groutEstandar}} <span class="text-sm opacity-40">Unidad(es)</span></p>
+                                                                </div>
+                                                                <div class="flex flex-col items-center p-4 border-r-2">
+                                                                    <h2 class="text-center font-bold text-xl">Grout Plus</h2>
+                                                                    <p class="text-4xl font-black">{{groutPlus}} <span class="text-sm opacity-40">Unidad(es)</span></p>
+                                                                </div>
+                                                                <div class="flex flex-col items-center p-4 border-r-2 ">
+                                                                    <h2 class="text-center font-bold text-xl">Mortero NV</h2>
+                                                                    <p class="text-4xl font-black">{{morteroNV}} <span class="text-sm opacity-40">Unidad(es)</span></p>
+                                                                </div>
+                                                                <div class="flex flex-col items-center p-4">
+                                                                    <h2 class="text-center font-bold text-xl">Seal Estandar</h2>
+                                                                    <p class="text-4xl font-black">{{sealEstandar}} <span class="text-sm opacity-40">Unidad(es)</span></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="w-140" id="morterosPie">
+                                                            <apx-chart
+                                                              [series]="morterosOptionsPie.series"
+                                                              [chart]="morterosOptionsPie.chart"
+                                                              [plotOptions]="morterosOptionsPie.plotOptions"
+                                                              [labels]="morterosOptionsPie.labels"
+                                                              [legend]="morterosOptionsPie.legend"
+                                                              [colors]="morterosOptionsPie.colors"
+                                                              [responsive]="morterosOptionsPie.responsive"
+                                                            ></apx-chart>
+                                                        </div>
+                                                    </div>
+                                                    <div class="bg-white shadow-xl rounded-lg">
+                                                        <div id="morteros">
+                                                            <apx-chart
+                                                                [series]="morterosOptions.series"
+                                                                [chart]="morterosOptions.chart"
+                                                                [dataLabels]="morterosOptions.dataLabels"
+                                                                [plotOptions]="morterosOptions.plotOptions"
+                                                                [yaxis]="morterosOptions.yaxis"
+                                                                [legend]="morterosOptions.legend"
+                                                                [fill]="morterosOptions.fill"
+                                                                [stroke]="morterosOptions.stroke"
+                                                                [tooltip]="morterosOptions.tooltip"
+                                                                [xaxis]="morterosOptions.xaxis"
+                                                            ></apx-chart>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="flex flex-col bg-white rounded-lg shadow-lg">
+                                                <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                                                  <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+                                                    <div class="overflow-hidden">
+                                                      <table class="min-w-full text-left text-sm font-light text-surface dark:text-white">
+                                                        <thead class="border-b border-neutral-200 font-medium dark:border-white/10">
+                                                          <tr>
+                                                            <th scope="col" class="px-6 py-4">#</th>
+                                                            <th scope="col" class="px-6 py-4">Mortero</th>
+                                                            <th scope="col" class="px-6 py-4" *ngFor="let mes of mesesNombre">{{mes}}</th>
+                                                          </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                          <tr *ngFor="let mortero of TablaMorteros; let i = index" class="border-b border-neutral-200 transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-white/10 dark:hover:bg-neutral-600">
+                                                            <td class="whitespace-nowrap px-6 py-4 font-medium">{{i + 1}}</td>
+                                                            <td class="whitespace-nowrap px-6 py-4">{{ mortero.name }}</td>
+                                                            <td class="whitespace-nowrap px-6 py-4" *ngFor="let month of mesesNombre; let j = index">
+                                                              {{ getDataForMonth(mortero.data, j) }}
+                                                            </td>
+                                                          </tr>
+                                                        </tbody>
+                                                      </table>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                                
+                            </mat-tab>
+                            <mat-tab label="Mamposteria" (click)="showMamposteria()" (click)="cargarDatosMamposteria()">
+                                <button (click)="showMamposteria()" (click)="cargarDatosMamposteria()" class="text-2xl font-bold border-b-2 px-2 py-1 hover:opacity-30">Inventario Mamposteria</button>
+                                <ng-container *ngIf="mamposteriaView">
+                                    <div class="flex flex-col gap-4">
+                                        <div class="w-full flex flex-col gap-2 justify-center items-center bg-white shadow-xl rounded-lg p-4">
+                                            <h2 class="text-center mr-4 text-xl font-black uppercase">Seleccione una Fecha</h2>
+                                            <div class="flex gap-4 justify-center items-center">
+                                                <div class="flex gap-4">
+                                                    <label class="uppercase text-xl font-bold" for="start">Fecha Inicio:</label>
+                                                    <input class="border-2 bg-slate-100 px-4 py-1 rounded-lg" type="date" id="start" value="2024-03-01" min="2024-01-01" max="2024-12-31" (change)="setfechaIncio($event.target.value)">
+                                                </div>
+                                                <div class="flex gap-4">
+                                                    <label class="uppercase text-xl font-bold" for="end">Fecha Fin:</label>
+                                                    <input class="border-2 bg-slate-100 px-4 py-1 rounded-lg" type="date" id="end" value="2024-06-13" min="2024-01-01" max="2024-12-31" (change)="setfechaFin($event.target.value)"/>
+                                                </div>
+                                                <div>
+                                                    <button class="px-4 py-1 text-xl font-bold bg-orange-400 hover:bg-orange-500 rounded-lg text-white" (click)="cargarDatosMamposteria()">Buscar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="container mx-auto w-full">
+                                            <div class="flex flex-col gap-2">
+                                                <div class="flex gap-4 justify-between items-center bg-white rounded-lg shadow-lg p-6">
+                                                    <div class="flex flex-col gap-2">
+                                                        <h1 class="text-center font-black text-2xl mt-2 uppercase">Suma total mensual mampuesto 12</h1>
+                                                        <div class="grid grid-cols-3 gap-2 bg-slate-100 shadow-lg rounded-lg">
+                                                            <div class="flex flex-col items-center p-6 border-r-2 border-b-2">
+                                                                <h2 class="text-center font-black text-xl">Hembra/Macho SB</h2>
+                                                                <p class="text-4xl font-black">{{HMSin}} <span class="text-sm opacity-40">Unidad(es)</span></p>
+                                                            </div>
+                                                            <div class="flex flex-col items-center p-6 border-r-2 border-b-2">
+                                                                <h2 class="text-center font-black text-xl">Maestra Nueva SB</h2>
+                                                                <p class="text-4xl font-black">{{maestraNuevaSin}} <span class="text-sm opacity-40">Unidad(es)</span></p>
+                                                            </div>
+                                                            <div class="flex flex-col items-center p-6 border-b-2">
+                                                                <h2 class="text-center font-black text-xl">Un Orificio SB</h2>
+                                                                <p class="text-4xl font-black">{{sinBicel6}} <span class="text-sm opacity-40">Unidad(es)</span></p>
+                                                            </div>
+                                                            <div class="flex flex-col items-center p-6 border-r-2 border-b-2">
+                                                                <h2 class="text-center font-black text-xl">Doble SB</h2>
+                                                                <p class="text-4xl font-black">{{dobleSin}} <span class="text-sm opacity-40">Unidad(es)</span></p>
+                                                            </div>
+                                                            <div class="flex flex-col items-center p-6 border-r-2 border-b-2">
+                                                                <h2 class="text-center font-black text-xl">Hembra SB</h2>
+                                                                <p class="text-4xl font-black">{{HembraSin}} <span class="text-sm opacity-40">Unidad(es)</span></p>
+                                                            </div>
+                                                            <div class="flex flex-col items-center p-6 border-b-2">
+                                                                <h2 class="text-center font-black text-xl">Macho CB</h2>
+                                                                <p class="text-4xl font-black">{{machoCon}} <span class="text-sm opacity-40">Unidad(es)</span></p>
+                                                            </div>
+                                                            <div class="flex flex-col items-center p-6 border-r-2 border-b-2">
+                                                                <h2 class="text-center font-black text-xl">Maestra SB</h2>
+                                                                <p class="text-4xl font-black">{{maestraSin}} <span class="text-sm opacity-40">Unidad(es)</span></p>
+                                                            </div>
+                                                            <div class="flex flex-col items-center p-6 border-r-2 border-b-2">
+                                                                <h2 class="text-center font-black text-xl">Maestra CB</h2>
+                                                                <p class="text-4xl font-black">{{maestraCon}} <span class="text-sm opacity-40">Unidad(es)</span></p>
+                                                            </div>
+                                                            <div class="flex flex-col items-center p-6 border-b-2">
+                                                                <h2 class="text-center font-black text-xl">Mixto CB</h2>
+                                                                <p class="text-4xl font-black">{{mixtoCon}} <span class="text-sm opacity-40">Unidad(es)</span></p>
+                                                            </div>
+                                                            <div class="flex flex-col items-center p-6 border-r-2">
+                                                                <h2 class="text-center font-black text-xl">Mixto SB</h2>
+                                                                <p class="text-4xl font-black">{{mixtoaSin}} <span class="text-sm opacity-40">Unidad(es)</span></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="w-140" id="mamposteria12Circle">
+                                                        <apx-chart
+                                                          [series]="chartOptionsCircleMamposteria12.series"
+                                                          [chart]="chartOptionsCircleMamposteria12.chart"
+                                                          [plotOptions]="chartOptionsCircleMamposteria12.plotOptions"
+                                                          [labels]="chartOptionsCircleMamposteria12.labels"
+                                                          [legend]="chartOptionsCircleMamposteria12.legend"
+                                                          [colors]="chartOptionsCircleMamposteria12.colors"
+                                                          [responsive]="chartOptionsCircleMamposteria12.responsive"
+                                                        ></apx-chart>
+                                                    </div>
+                                                </div>
+                                                <div class="bg-white shadow-xl rounded-lg" id="mamposteria6">
+                                                    <apx-chart
+                                                        [series]="momposteroOption6.series"
+                                                        [chart]="momposteroOption6.chart"
+                                                        [dataLabels]="momposteroOption6.dataLabels"
+                                                        [plotOptions]="momposteroOption6.plotOptions"
+                                                        [yaxis]="momposteroOption6.yaxis"
+                                                        [legend]="momposteroOption6.legend"
+                                                        [fill]="momposteroOption6.fill"
+                                                        [stroke]="momposteroOption6.stroke"
+                                                        [tooltip]="momposteroOption6.tooltip"
+                                                        [xaxis]="momposteroOption6.xaxis"
+                                                    ></apx-chart>
+                                                </div>
+                                                <div>
+                                                    <div class="flex flex-col bg-white rounded-lg shadow-lg">
+                                                        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                                                          <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+                                                            <div class="overflow-hidden">
+                                                              <table class="min-w-full text-left text-sm font-light text-surface dark:text-white">
+                                                                <thead class="border-b border-neutral-200 font-medium dark:border-white/10">
+                                                                  <tr>
+                                                                    <th scope="col" class="px-6 py-4">#</th>
+                                                                    <th scope="col" class="px-6 py-4">Mamposteria 12</th>
+                                                                    <th scope="col" class="px-6 py-4" *ngFor="let mes of mesesNombre">{{mes}}</th>
+                                                                  </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                  <tr *ngFor="let mom12 of mamposteria12; let i = index" class="border-b border-neutral-200 transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-white/10 dark:hover:bg-neutral-600">
+                                                                    <td class="whitespace-nowrap px-6 py-4 font-medium">{{i + 1}}</td>
+                                                                    <td class="whitespace-nowrap px-6 py-4">{{ mom12.name }}</td>
+                                                                    <td class="whitespace-nowrap px-6 py-4" *ngFor="let month of mesesNombre; let j = index">
+                                                                      {{ getDataForMonth(mom12.data, j) }}
+                                                                    </td>
+                                                                  </tr>
+                                                                </tbody>
+                                                              </table>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="flex flex-col gap-2">
+                                            <div class="flex gap-4 justify-between items-center bg-white rounded-lg shadow-lg p-6">
+                                                <div class="flex flex-col gap-2">
+                                                    <h1 class="text-center font-black text-2xl mt-2 uppercase">Suma total mensual mampuesto 20</h1>
+                                                    <div class="grid grid-cols-3 gap-2 bg-slate-100 shadow-lg rounded-lg">
+                                                        <div class="flex flex-col items-center p-6 border-r-2 border-b-2">
+                                                            <h2 class="text-center font-black text-xl">Un Orificio CB</h2>
+                                                            <p class="text-4xl font-black">{{CB6}} <span class="text-sm opacity-40">Unidad(es)</span></p>
+                                                        </div>
+                                                        <div class="flex flex-col items-center p-6 border-r-2 border-b-2">
+                                                            <h2 class="text-center font-black text-xl">Un Orificio SB</h2>
+                                                            <p class="text-4xl font-black">{{SB6}} <span class="text-sm opacity-40">Unidad(es)</span></p>
+                                                        </div>
+                                                        <div class="flex flex-col items-center p-6 border-b-2">
+                                                            <h2 class="text-center font-black text-xl">Doble SB</h2>
+                                                            <p class="text-4xl font-black">{{dobleSin20}} <span class="text-sm opacity-40">Unidad(es)</span></p>
+                                                        </div>
+                                                        <div class="flex flex-col items-center p-6 border-r-2 border-b-2">
+                                                            <h2 class="text-center font-black text-xl">Hembra/Macho SB</h2>
+                                                            <p class="text-4xl font-black">{{HMSin20}} <span class="text-sm opacity-40">Unidad(es)</span></p>
+                                                        </div>
+                                                        <div class="flex flex-col items-center p-6 border-r-2 border-b-2">
+                                                            <h2 class="text-center font-black text-xl">Hembra SB</h2>
+                                                            <p class="text-4xl font-black">{{hembraSin20}} <span class="text-sm opacity-40">Unidad(es)</span></p>
+                                                        </div>
+                                                        <div class="flex flex-col items-center p-6 border-b-2">
+                                                            <h2 class="text-center font-black text-xl">Maestra SB</h2>
+                                                            <p class="text-4xl font-black">{{maestraSin20}} <span class="text-sm opacity-40">Unidad(es)</span></p>
+                                                        </div>
+                                                        <div class="flex flex-col items-center p-6 border-r-2">
+                                                            <h2 class="text-center font-black text-xl">Maestra Nueva SB</h2>
+                                                            <p class="text-4xl font-black">{{maestraNuevaSin20}} <span class="text-sm opacity-40">Unidad(es)</span></p>
+                                                        </div>
+                                                        <div class="flex flex-col items-center p-6 border-r-2">
+                                                            <h2 class="text-center font-black text-xl">Mixto SB</h2>
+                                                            <p class="text-4xl font-black">{{mixtoSin20}} <span class="text-sm opacity-40">Unidad(es)</span></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="w-140" id="mamposteria12Circle20">
+                                                    <apx-chart
+                                                      [series]="chartOptionsCircleMamposteria20.series"
+                                                      [chart]="chartOptionsCircleMamposteria20.chart"
+                                                      [plotOptions]="chartOptionsCircleMamposteria20.plotOptions"
+                                                      [labels]="chartOptionsCircleMamposteria20.labels"
+                                                      [legend]="chartOptionsCircleMamposteria20.legend"
+                                                      [colors]="chartOptionsCircleMamposteria20.colors"
+                                                      [responsive]="chartOptionsCircleMamposteria20.responsive"
+                                                    ></apx-chart>
+                                                </div>
+                                            </div>
+                                            <div class="bg-white shadow-xl rounded-lg" id="mamposteria620">
+                                                <apx-chart
+                                                    [series]="momposteroOption620.series"
+                                                    [chart]="momposteroOption620.chart"
+                                                    [dataLabels]="momposteroOption620.dataLabels"
+                                                    [plotOptions]="momposteroOption620.plotOptions"
+                                                    [yaxis]="momposteroOption620.yaxis"
+                                                    [legend]="momposteroOption620.legend"
+                                                    [fill]="momposteroOption620.fill"
+                                                    [stroke]="momposteroOption620.stroke"
+                                                    [tooltip]="momposteroOption620.tooltip"
+                                                    [xaxis]="momposteroOption620.xaxis"
+                                                ></apx-chart>
+                                            </div>
+                                            <div class="flex flex-col bg-white rounded-lg shadow-lg">
+                                                <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                                                  <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+                                                    <div class="overflow-hidden">
+                                                      <table class="min-w-full text-left text-sm font-light text-surface dark:text-white">
+                                                        <thead class="border-b border-neutral-200 font-medium dark:border-white/10">
+                                                          <tr>
+                                                            <th scope="col" class="px-6 py-4">#</th>
+                                                            <th scope="col" class="px-6 py-4">Mamposteria 20</th>
+                                                            <th scope="col" class="px-6 py-4" *ngFor="let mes of mesesNombre">{{mes}}</th>
+                                                          </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                          <tr *ngFor="let mom20 of mamposteria20; let i = index" class="border-b border-neutral-200 transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-white/10 dark:hover:bg-neutral-600">
+                                                            <td class="whitespace-nowrap px-6 py-4 font-medium">{{i + 1}}</td>
+                                                            <td class="whitespace-nowrap px-6 py-4">{{ mom20.name }}</td>
+                                                            <td class="whitespace-nowrap px-6 py-4" *ngFor="let month of mesesNombre; let j = index">
+                                                              {{ getDataForMonth(mom20.data, j) }}
+                                                            </td>
+                                                          </tr>
+                                                        </tbody>
+                                                      </table>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                            </mat-tab>
+                            <mat-tab label="Dinteles" (click)="showDinteles()" (click)="cargaDataDinteles()">
+                                <div class="flex flex-col justify-center gap-5">
+                                    <div>
+                                        <button (click)="showDinteles()" (click)="cargaDataDinteles()" class="text-2xl font-bold border-b-2 px-2 py-1 hover:opacity-30">Inventario Dinteles</button>
+                                        <ng-container *ngIf="dintelesView">
+                                            <div class="flex flex-col-reverse justify-center items-center gap-4 container mx-auto">
+                                                <!-- <div>
+                                                    <table mat-table [dataSource]="this.dataSource$" class="overflow-y-visible">
+
+                                                        <ng-container matColumnDef="name">
+                                                          <th mat-header-cell *matHeaderCellDef style="z-index: 1;padding-left: 10px !important;"> Dintel </th>
+                                                          <td mat-cell *matCellDef="let element" style="z-index: 1;"> {{element.name}} </td>
+                                                        </ng-container>
+                                                      
+                                                        <ng-container *ngFor="let month of mesesNombre; let i = index" [matColumnDef]="month">
+                                                            <th mat-header-cell *matHeaderCellDef style="z-index: 1;padding-left: 10px !important;"> {{ month }} </th>
+                                                            <td mat-cell *matCellDef="let element" style="z-index: 1;"> {{ getDataForMonth(element.data, i) }} </td>
+                                                        </ng-container>
+                                                      
+                                                        <tr mat-header-row *matHeaderRowDef="displayedColumnsDinteles"></tr>
+                                                        <tr mat-row *matRowDef="let row; columns: displayedColumnsDinteles;"></tr>
+                                                    </table>
+                                                    <mat-paginator #paginator [pageSizeOptions]="[ 10, 25, 100]"
+                                                      aria-label="Select page of users"></mat-paginator>
+                                                </div> -->
+                                                <div class="flex flex-col bg-white rounded-lg shadow-lg w-full">
+                                                    <h2 class="text-xl text-center font-black uppercase p-2">Tabla general</h2>
+                                                    <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                                                      <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+                                                        <div class="overflow-hidden">
+                                                          <table class="min-w-full text-left text-sm font-light text-surface dark:text-white">
+                                                            <thead class="border-b border-neutral-200 font-medium dark:border-white/10">
+                                                              <tr>
+                                                                <th scope="col" class="px-6 py-4">#</th>
+                                                                <th scope="col" class="px-6 py-4">Dintel</th>
+                                                                <th scope="col" class="px-6 py-4" *ngFor="let mes of mesesNombre">{{mes}}</th>
+                                                              </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                              <tr *ngFor="let dintel of tablaDinteles; let i = index" class="border-b border-neutral-200 transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-white/10 dark:hover:bg-neutral-600">
+                                                                <td class="whitespace-nowrap px-6 py-4 font-medium">{{i + 1}}</td>
+                                                                <td class="whitespace-nowrap px-6 py-4">{{ dintel.name }}</td>
+                                                                <td class="whitespace-nowrap px-6 py-4" *ngFor="let month of mesesNombre; let j = index">
+                                                                  {{ getDataForMonth(dintel.data, j) }}
+                                                                </td>
+                                                              </tr>
+                                                            </tbody>
+                                                          </table>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                </div>
+                                                <div class=" bg-white shadow-xl rounded-lg p-2 w-full" id="dintel">
+                                                    <h2 class="text-xl text-center font-black uppercase">Comparativa Mensual</h2>
+                                                    <apx-chart
+                                                        [series]="dintelOption.series" [chart]="dintelOption.chart" 
+                                                        [xaxis]="dintelOption.xaxis" [yaxis]="dintelOption.yaxis"
+                                                        [dataLabels]="dintelOption.dataLabels" [stroke]="dintelOption.stroke"
+                                                        [plotOptions]="dintelOption.plotOptions" [tooltip]="dintelOption.tooltip"
+                                                        [fill]="dintelOption.fill">
+                                                    ></apx-chart>
+                                                </div>
+
+                                                <div class="bg-white shadow-xl rounded-lg p-2 w-full">
+                                                    <h2 class="text-xl text-center font-black uppercase">Sumatoria Total Meses</h2>
+                                                    <div id="dintelMesesTotal">
+                                                        <apx-chart
+                                                          [series]="dintelOptionTotal.series"
+                                                          [chart]="dintelOptionTotal.chart"
+                                                          [dataLabels]="dintelOptionTotal.dataLabels"
+                                                          [plotOptions]="dintelOptionTotal.plotOptions"
+                                                          [xaxis]="dintelOptionTotal.xaxis"
+                                                        ></apx-chart>
+                                                    </div>
+                                                </div>
+
+                                                <div class="w-full flex flex-col gap-2 justify-center items-center bg-white shadow-xl rounded-lg p-4">
+                                                    <h2 class="text-center mr-4 text-xl font-black uppercase">Seleccione una Fecha</h2>
+                                                    <div class="flex gap-4 justify-center items-center">
+                                                        <div class="flex gap-4">
+                                                            <label class="uppercase text-xl font-bold" for="start">Fecha Inicio:</label>
+                                                            <input class="border-2 bg-slate-100 px-4 py-1 rounded-lg" type="date" id="start" value="2024-01-01" (change)="setfechaIncio($event.target.value)">
+                                                        </div>
+                                                        <div class="flex gap-4">
+                                                            <label class="uppercase text-xl font-bold" for="end">Fecha Fin:</label>
+                                                            <input class="border-2 bg-slate-100 px-4 py-1 rounded-lg" type="date" id="end" value="2024-06-06" (change)="setfechaFin($event.target.value)"/>
+                                                        </div>
+                                                        <div>
+                                                            <button class="px-4 py-1 text-xl font-bold bg-orange-400 hover:bg-orange-500 rounded-lg text-white" (click)="cargaDataDinteles()">Buscar</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </mat-tab>
+                        </mat-tab-group>
+                    </ng-template>
+                </mat-tab>
+
+            </mat-tab-group>
+        </div>
+    </div>
+
+</div>

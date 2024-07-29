@@ -1,0 +1,352 @@
+<div class="sm:absolute sm:inset-0 flex flex-col flex-auto min-w-0 sm:overflow-hidden bg-card dark:bg-transparent">
+
+    <!-- Header -->
+    <div
+        class="relative flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between py-8 px-6 md:px-8 border-b">
+
+        <!-- Title -->
+        <div class="text-4xl font-extrabold tracking-tight">Órdenes de Pedido por
+            Módulo {{ proyectosDtos.module.ruc }}
+        </div>
+        <!-- Actions -->
+        <div class="flex flex-shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+            <!-- Search -->
+            <mat-form-field class="fuse-mat-dense fuse-mat-no-subscript fuse-mat-rounded min-w-64" style="width: 100%;">
+                <mat-icon class="icon-size-5" matPrefix [svgIcon]="'heroicons_solid:search'"></mat-icon>
+                <input matInput (keyup)="applyFilter($event)" [autocomplete]="'on'" [placeholder]="'Buscar Proyecto'"
+                    #input>
+            </mat-form-field>
+
+        </div>
+    </div>
+
+    <!-- Main -->
+    <div class="flex flex-auto overflow-hidden" style="overflow: auto !important;">
+        <!-- Products list -->
+        <div class="flex flex-col flex-auto sm:mb-18 overflow-hidden sm:overflow-y-auto"
+            style="overflow: auto !important;">
+
+
+            <div style="width: 100%;height: 100%;">
+                <div class="container" *ngFor="let project of proyectosDtos.module;let i = index">
+                    <b>Módulo {{ i + 1 }}</b>
+
+                    <div class="M2">
+                        <h1 style="border: none;font-weight: 800;">M2</h1>
+                    </div>
+                    <div class="CodigoModulo">
+                        <h1 style="border: none;font-weight: 800;">SECCIÓN</h1>
+                    </div>
+                    <div class="Ubicacion">
+                        <h1 style="border: none;font-weight: 800;">CUANTIFICACIÓN VOLÚMENES POR SECCIÓN </h1>
+                    </div>
+                    <div class="Detalle">
+                        <h1 style="border: none;font-weight: 800;">DETALLE DE DESPACHO POR SECCIÓN </h1>
+                    </div>
+                    <div class="Estado">
+                        <h1 style="border: none;font-weight: 800;">ESTADO</h1>
+                    </div>
+
+                    <div class="Nuevo">
+                        <h1 style="border: none;font-weight: 800;">ACCIONES</h1>
+                    </div>
+
+                    <div class="Borde">
+                        <div style="
+                            height: 15px;
+                        "></div>
+                    </div>
+
+
+                    <div style="display: contents;">
+                        <div class="DataCodigo">
+
+                            <div *ngFor="let a of project.purchaseOrder[0]" style="
+                            width: 100%;
+                            border-bottom: 1px solid;
+                            border-bottom-style: dashed;
+                            display: flex;
+                            flex-direction: column;
+                            flex-wrap: nowrap;
+                            align-content: center;
+                            justify-content: center;
+                            align-items: center;
+                            padding: 5px;
+                        ">
+                                <h2 style="border: none;font-weight: 600;">{{ a.section[0].titulo }}
+                                </h2>
+                            </div>
+                        </div>
+                        <div class="DataM2">
+                            <div *ngFor="let a of project.purchaseOrder[0]" style="
+                            width: 100%;
+                            border-bottom: 1px solid;
+                            border-bottom-style: dashed;
+                            display: flex;
+                            flex-direction: column;
+                            flex-wrap: nowrap;
+                            align-content: center;
+                            justify-content: center;
+                            align-items: center;
+                            padding: 5px;
+                        ">
+                                <h2 style="border: none;font-weight: 600;">{{ (a.section[0].calculo2) }} </h2>
+                            </div>
+                        </div>
+                        <div class="DataUbicacion">
+                            <div id="forUbicacion" *ngFor="let a of project.purchaseOrder[0]; let i = index" style="
+                            width: 100%;
+                            border-bottom: 1px solid;
+                            border-bottom-style: dashed;
+                            display: flex;
+                            flex-direction: column;
+                            flex-wrap: nowrap;
+                            align-content: center;
+                            justify-content: center;
+                            align-items: center;
+                            padding: 5px;
+                        ">
+                                <table>
+                                    <tr>
+                                        <th>DENOMINACION</th>
+                                        <th>UNIDAD</th>
+                                        <th>TOTAL</th>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ (a.section[0].denominacion1) }}</td>
+                                        <td>{{ (a.section[0].unidad1) }}</td>
+                                        <td>{{ (a.section[0].calculo1) }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ (a.section[0].denominacion2) }}</td>
+                                        <td>{{ (a.section[0].unidad2) }}</td>
+                                        <td>{{ (a.section[0].calculo2) }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ (a.section[0].denominacion3) }}</td>
+                                        <td>{{ (a.section[0].unidad3) }}</td>
+                                        <td>{{ (a.section[0].calculo3) }}</td>
+                                    </tr>
+                                </table>
+
+                            </div>
+                        </div>
+
+                        <div class="DataDetalle">
+                            <div *ngFor="let a of project.purchaseOrder[0]; let i = index" style="
+                            width: 100%;
+                            border-bottom: 1px solid;
+                            border-bottom-style: dashed;
+                            display: flex;
+                            flex-direction: column;
+                            flex-wrap: nowrap;
+                            align-content: center;
+                            justify-content: center;
+                            align-items: center;
+                            padding: 5px;
+                        ">
+
+
+                                <table>
+                                    <tr>
+                                        <th>DESCRIPCION</th>
+                                        <th>UNIDAD</th>
+
+                                        <!--<th>PRECIO</th>-->
+                                        <th> PALETS</th>
+                                        <!--<th>TOTAL</th>-->
+                                        <th>ESTADO</th>
+
+                                    </tr>
+                                    <tr>
+
+                                        <td>{{ (a.section[0].detalles[0].descripcion) }}</td>
+                                        <td>{{ (a.section[0].detalles[0].unidades) }}</td>
+                                        <!--<td>{{ (+a.section[0].detalles[0].precio.toFixed(2)).toLocaleString('de-DE') }}
+                                        </td>-->
+                                        <td>{{ (+a.section[0].detalles[0].cantidad.toFixed(2)).toLocaleString('de-DE')}}
+                                        </td>
+
+                                        <!--<td>{{ (+a.section[0].detalles[0].total.toFixed(2)).toLocaleString('de-DE')}}
+                                        </td>-->
+                                        <td>
+                                            <div *ngIf="(a.section[0].detalles[0].estadoPedido) === false">Próximo</div>
+                                            <div *ngIf="(a.section[0].detalles[0].estadoPedido) !== false">Despachado
+                                            </div>
+                                        </td>
+
+                                    </tr>
+
+                                    <tr>
+
+                                        <td>{{ (a.section[0].detalles[1].descripcion) }}</td>
+                                        <td>{{ (a.section[0].detalles[1].unidades) }}</td>
+                                        <!--<td>{{ ((+a.section[0].detalles[1].precio.toFixed(2)).toLocaleString('de-DE'))
+                                            }}</td>-->
+                                        <td>{{ (+a.section[0].detalles[1].cantidad.toFixed(2)).toLocaleString('de-DE')
+                                            }}</td>
+                                        <!--<td>{{ (+a.section[0].detalles[1].total.toFixed(2)).toLocaleString('de-DE') }}
+                                        </td>-->
+                                        <td>
+                                            <div *ngIf="(a.section[0].detalles[1].estadoPedido) === false">Próximo</div>
+                                            <div *ngIf="(a.section[0].detalles[1].estadoPedido) !== false">Despachado
+                                            </div>
+                                        </td>
+
+                                    </tr>
+
+                                    <tr>
+
+                                        <td>{{ (a.section[0].detalles[2].descripcion) }}</td>
+                                        <td>{{ (a.section[0].detalles[2].unidades) }}</td>
+                                        <!--<td>{{ ((+a.section[0].detalles[2].precio.toFixed(2)).toLocaleString('de-DE'))
+                                            }}</td>-->
+                                        <td>{{ (+a.section[0].detalles[2].cantidad.toFixed(2)).toLocaleString('de-DE')
+                                            }}</td>
+                                        <!--<td>{{ (+a.section[0].detalles[2].total.toFixed(2)).toLocaleString('de-DE') }}
+                                        </td>-->
+                                        <td>
+                                            <div *ngIf="(a.section[0].detalles[2].estadoPedido) === false">Próximo</div>
+                                            <div *ngIf="(a.section[0].detalles[2].estadoPedido) !== false">Despachado
+                                            </div>
+                                        </td>
+
+                                    </tr>
+
+                                    <tr>
+
+                                        <td>{{ (a.section[0].detalles[3].descripcion) }}</td>
+                                        <td>{{ (a.section[0].detalles[3].unidades) }}</td>
+                                        <!--<td>{{ ((+a.section[0].detalles[3].precio.toFixed(2)).toLocaleString('de-DE'))
+                                            }}</td>-->
+                                        <td>{{ (+a.section[0].detalles[3].cantidad.toFixed(2)).toLocaleString('de-DE')
+                                            }}</td>
+                                        <!--<td>{{ (+a.section[0].detalles[3].total.toFixed(2)).toLocaleString('de-DE') }}
+                                        </td>-->
+                                        <td>
+                                            <div *ngIf="(a.section[0].detalles[3].estadoPedido) === false">Próximo</div>
+                                            <div *ngIf="(a.section[0].detalles[3].estadoPedido) !== false">Despachado
+                                            </div>
+                                        </td>
+
+                                    </tr>
+
+                                    <tr>
+
+                                        <td>{{ (a.section[0].detalles[4].descripcion) }}</td>
+                                        <td>{{ (a.section[0].detalles[4].unidades) }}</td>
+                                        <!--<td>{{ ((+a.section[0].detalles[4].precio.toFixed(2)).toLocaleString('de-DE'))
+                                            }}</td>-->
+                                        <td>{{ (+a.section[0].detalles[4].cantidad.toFixed(2)).toLocaleString('de-DE')
+                                            }}</td>
+                                        <!--<td>{{ (+a.section[0].detalles[4].total.toFixed(2)).toLocaleString('de-DE') }}
+                                        </td>-->
+                                        <td>
+                                            <div *ngIf="(a.section[0].detalles[4].estadoPedido) === false">Próximo</div>
+                                            <div *ngIf="(a.section[0].detalles[4].estadoPedido) !== false">Despachado
+                                            </div>
+                                        </td>
+
+                                    </tr>
+
+                                    <tr>
+
+                                        <td>{{ (a.section[0].detalles[5].descripcion) }}</td>
+                                        <td>{{ (a.section[0].detalles[5].unidades) }}</td>
+                                        <!--<td>{{ ((+a.section[0].detalles[5].precio.toFixed(2)).toLocaleString('de-DE'))
+                                            }}</td>-->
+                                        <td>{{ (+a.section[0].detalles[5].cantidad.toFixed(2)).toLocaleString('de-DE')
+                                            }}</td>
+                                        <!--<td>{{ (+a.section[0].detalles[5].total.toFixed(2)).toLocaleString('de-DE') }}
+                                        </td>-->
+                                        <td>
+                                            <div *ngIf="(a.section[0].detalles[5].estadoPedido) === false">Próximo</div>
+                                            <div *ngIf="(a.section[0].detalles[5].estadoPedido) !== false">Despachado
+                                            </div>
+                                        </td>
+
+                                    </tr>
+
+
+                                    <tr>
+
+                                        <td>{{ (a.section[0].detalles[6].descripcion) }}</td>
+                                        <td>{{ (a.section[0].detalles[6].unidades) }}</td>
+                                        <!--<td>{{ ((+a.section[0].detalles[6].precio.toFixed(2)).toLocaleString('de-DE'))
+                                            }}</td>-->
+                                        <td>{{ (+a.section[0].detalles[6].cantidad.toFixed(2)).toLocaleString('de-DE')
+                                            }}</td>
+                                        <!--<td>{{ (+a.section[0].detalles[6].total.toFixed(2)).toLocaleString('de-DE') }}
+                                        </td>-->
+                                        <td>
+                                            <div *ngIf="(a.section[0].detalles[6].estadoPedido) === false">Próximo</div>
+                                            <div *ngIf="(a.section[0].detalles[6].estadoPedido) !== false">Despachado
+                                            </div>
+                                        </td>
+
+                                    </tr>
+
+
+
+
+
+                                </table>
+
+                            </div>
+                        </div>
+
+
+                        <div class="DataEstado">
+                            <div *ngFor="let a of project.purchaseOrder[0]" style="
+                            width: 100%;
+                            border-bottom: 1px solid;
+                            border-bottom-style: dashed;
+                            display: flex;
+                            flex-direction: column;
+                            flex-wrap: nowrap;
+                            align-content: center;
+                            justify-content: center;
+                            align-items: center;
+                            padding: 5px;
+                        ">
+                                <h2 style="border: none;font-weight: 600;">
+                                    {{ a.status }}
+
+
+                                    <button class="ml-4 px-1 sm:px-4 min-w-10" mat-flat-button [color]="'primary'"
+                                        [routerLink]="['/detallesMateriales/',this.id,a._id,a.module]"
+                                        style="background: #00ffff00;color: #4f46e5;">
+                                        <mat-icon class="icon-size-5"
+                                            [svgIcon]="'heroicons_solid:plus-circle'"></mat-icon>
+                                        <span class="hidden sm:inline-block ml-2">Generar pedido</span>
+                                    </button>
+                                </h2>
+
+                            </div>
+
+                        </div>
+
+                        <div class="DataNuevo">
+
+                            <button class="ml-4 px-1 sm:px-4 min-w-10" mat-flat-button [color]="'primary'"
+                                (click)="addNewOrdenPedidoGeneral(project._id)"
+                                style="background: #00ffff00;color: #4f46e5;" *ngIf="!project.purchaseOrder[0][0]">
+                                <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:plus-circle'"></mat-icon>
+                                <span class="hidden sm:inline-block ml-2">Nueva Orden
+                                    Pedido</span>
+                            </button>
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>

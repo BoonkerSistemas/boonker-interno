@@ -1,0 +1,102 @@
+<div class="flex flex-col flex-auto w-full">
+    <div class="flex flex-wrap w-full max-w-screen-xl mx-auto p-6 md:p-8">
+        <!-- Title and action buttons -->
+        <div class="flex items-center justify-between w-full">
+        </div>
+
+        <div class="grid grid-cols-1 xl:grid-cols-1 gap-8 w-full mt-8">
+            <div class="flex flex-col flex-auto w-full max-w-xs sm:max-w-5xl mx-auto">
+
+                <div class="flex gap-2">
+                    <button class="{{display ? 'bg-slate-300 hover:bg-slate-400 p-2 uppercase text-white font-bold rounded-lg rounded-t-full py-2 px-8' : 'bg-green-800 hover:bg-green-700 p-2 uppercase text-white font-bold rounded-lg rounded-t-full py-2 px-8'}}"
+                        (click)="viewPage()"
+                    >
+                        Registro
+                    </button>
+                    <button class="{{display ?  'bg-green-800 hover:bg-green-700 p-2 uppercase text-white font-bold rounded-lg rounded-t-full py-2 px-8' : 'bg-slate-300 hover:bg-slate-400 p-2 uppercase text-white font-bold rounded-lg rounded-t-full py-2 px-8'}}"
+                        (click)="viewPage()"
+                    >
+                        Escaner
+                    </button>
+                    
+                </div>
+                <ng-container *ngIf="display">
+                    <h2 class="text-center text-xl font-bold uppercase">Control de Horario</h2>
+                    <div class="">
+                        <iframe id="JotFormIFrame-241426205089050" title="Escaner QR" onload="window.parent.scrollTo(0,0)"
+                            allowtransparency="true" allow="geolocation; microphone; camera; fullscreen"
+                            src="https://form.jotform.com/241426205089050" frameborder="0"
+                            style="min-width:100%;max-width:100%;height:800px;border:none;" scrolling="no">
+                        </iframe>
+                        <script src='https://cdn.jotfor.ms/s/umd/latest/for-form-embed-handler.js'></script>
+                    
+                    </div>
+                </ng-container>
+
+                <ng-container *ngIf="!display">
+                    <h2 class="text-center text-xl font-bold uppercase mb-4">Registro de Personal y Visitas</h2>
+                    <div class="bg-white p-4">
+                        <form  class="mt-10 ">
+                            <div class="mb-4">
+                              <label class="text-gray-800" for="nombre">Nombre:</label>
+                              <input
+                                id="nombre"
+                                type="text"
+                                formControlName="nombre"
+                                class="mt-2 block w-full p-3 bg-gray-50"
+                                placeholder="Ej. Juan, Andrea"
+                              />
+                              
+                            </div>
+                          
+                            <div class="mb-4">
+                              <label class="text-gray-800" for="apellido">Apellido:</label>
+                              <input
+                                id="apellido"
+                                type="text"
+                                formControlName="apellido"
+                                class="mt-2 block w-full p-3 bg-gray-50"
+                                placeholder="Ej. García, López"
+                              />
+                              
+                            </div>
+    
+                            <div class="mb-4">
+                                <label class="text-gray-800" for="cedula">Área:</label>
+                                <input
+                                  id="cedula"
+                                  type="text"
+                                  formControlName="cedula"
+                                  class="mt-2 block w-full p-3 bg-gray-50"
+                                  placeholder="Ej. Recursos Humanos, Administrador"
+                                />
+                              
+                              </div>
+                          
+                            <input
+                              type="submit"
+                              class="mt-5 w-full bg-indigo-600 p-2 text-white font-bold text-lg cursor-pointer rounded"
+                              value="Registrar Visita"
+                            />
+                          </form>
+                    </div>
+                      
+                </ng-container>
+                <!-- No courses -->
+                <ng-template #noCourses>
+                    <div class="flex flex-auto flex-col items-center justify-center bg-gray-100 dark:bg-transparent">
+                        <mat-icon class="icon-size-24" [svgIcon]="'heroicons_outline:document-search'"></mat-icon>
+                        <div class="mt-6 text-2xl font-semibold tracking-tight text-secondary">No se encontro ninguna casa ni
+                            proyecto asigando a tu cuenta!
+                        </div>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

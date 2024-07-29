@@ -1,0 +1,2126 @@
+<div class="absolute inset-0 flex flex-col flex-auto w-full min-w-0 overflow-hidden">
+    <div class="flex flex-wrap w-full max-w-screen-xl mx-auto p-6 md:p-1 " style="
+          overflow-y: auto !important; ">
+
+        <!-- Title and action buttons -->
+        <div class="flex items-center justify-between w-full">
+            <div>
+                <div class="text-3xl font-semibold tracking-tight leading-8">Cronograma de Despachos Semana
+                    # {{ semana }} de {{ this.weekFormat[0] }} al {{ weekFormat[1] }}
+                </div>
+                <div class="font-medium tracking-tight text-secondary"> Última
+                    actualización {{ fechaSincronizacion | date:'d-M-yyyy hh:mm' }}
+                </div>
+                <div class="flex gap-6">
+                    <div>
+                        <button class="ml-4 px-1 sm:px-4 min-w-10" mat-flat-button [color]="'primary'" (click)="addNewProyect('')"
+                            *ngIf="rolLogin !=='LOGISTICA'">
+                            <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:plus-circle'"></mat-icon>
+                            <span class="hidden sm:inline-block ml-2">Nuevo</span>
+                        </button>
+                    </div>
+                    <div class="">
+                        <button
+                            class= "{{page ? 'w-56 bg-red-800 hover:bg-red-700 py-2 px-8 rounded-t-full text-white uppercase font-bold' : 'w-56 bg-green-800 hover:bg-green-700 py-2 px-8 rounded-t-full text-white uppercase font-bold'}} "
+                            (click)="detalleDespacho()"
+                        >
+                            {{page ? 'Cerrar Detalles' : 'Detalles Despacho'}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <ng-container *ngIf="page">
+            <div class="container mx-auto flex flex-col justify-center items-center gap-2">
+
+                <div class="flex flex-col p-4 mt-10 gap-2">
+                    <h3 class="text-3xl font-bold text-left">Total Proyectos Semanales: <span class="opacity-80">{{cantidadProyectos}}</span></h3>
+                    <h2 class="text-3xl font-black text-center uppercase mt-4">Programación despachos de la Semana</h2>
+                    <div class="flex flex-col bg-white rounded-lg shadow-lg">
+                        <div class="flex pt-2 px-2">
+                            <div class="w-40 hover:scale-95">
+                                <p class="text-2xl font-bold text-center"></p>
+                            </div>
+                            <div class="w-30 hover:scale-95 border-b">
+                                <p class="text-2xl font-black text-center p-2">Lunes</p>
+                            </div>
+                            <div class="w-30 hover:scale-95 border-b">
+                                <p class="text-2xl font-black text-center p-2">Martes</p>
+                            </div>
+                            <div class="w-30 hover:scale-95 border-b">
+                                <p class="text-2xl font-black text-center p-2">Miercoles</p>
+                            </div>
+                            <div class="w-30 hover:scale-95 border-b">
+                                <p class="text-2xl font-black text-center p-2">Jueves</p>
+                            </div>
+                            <div class="w-30 hover:scale-95 border-b">
+                                <p class="text-2xl font-black text-center p-2">Vierves</p>
+                            </div>
+                            <div class="w-30 hover:scale-95 border-b">
+                                <p class="text-2xl font-black text-center p-2">Sábado</p>
+                            </div>
+                            <div class="w-30 hover:scale-95 border-b">
+                                <p class="text-2xl font-black text-center p-2">Domingo</p>
+                            </div>
+                            <div class="w-30 hover:scale-95 border-b">
+                                <p class="text-2xl font-black text-center p-2">Total</p>
+                            </div>
+                        </div>
+                        <div class="flex px-2">
+                            <div class="w-40 hover:scale-95">
+                                <p class="text-xl font-black text-center border-b p-2">Mamposteria</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{(+arrayMamposteria[0].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{(+arrayMamposteria[1].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{(+arrayMamposteria[2].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{(+arrayMamposteria[3].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{(+arrayMamposteria[4].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{ (+arrayMamposteria[5].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{ (+arrayMamposteria[6].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 bg-slate-100 hover:bg-white">{{(+sumaTotalBlock.toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                        </div>
+                        <div class="flex px-2">
+                            <div class="w-40 hover:scale-95">
+                                <p class="text-xl font-black text-center border-b p-2">Dintel</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{(+arrayDintel[0].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{(+arrayDintel[1].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{(+arrayDintel[2].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{(+arrayDintel[3].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{(+arrayDintel[4].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{ (+arrayDintel[5].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{ (+arrayDintel[6].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 bg-slate-100 hover:bg-white">{{(+sumaTotalDinteles.toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                        </div>
+                        <div class="flex px-2">
+                            <div class="w-40 hover:scale-95">
+                                <p class="text-xl font-black text-center border-b p-2">Grout</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{(+arrayGrout[0].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{(+arrayGrout[1].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{(+arrayGrout[2].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{(+arrayGrout[3].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{(+arrayGrout[4].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{ (+arrayGrout[5].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{ (+arrayGrout[6].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 bg-slate-100 hover:bg-white">{{(+sumaTotalGrouts.toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                        </div>
+                        <div class="flex px-2 pb-2">
+                            <div class="w-40 hover:scale-95">
+                                <p class="text-xl font-black text-center border-b p-2">Mortero</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{(+arrayMortero[0].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{(+arrayMortero[1].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{(+arrayMortero[2].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{(+arrayMortero[3].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{(+arrayMortero[4].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{ (+arrayMortero[5].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{ (+arrayMortero[6].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-white bg-slate-100">{{(+sumaTotalMorteros.toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <h2 class="text-3xl font-black text-center uppercase mt-4">Despachos Realizados en la semana</h2>
+                    <div class="flex flex-col bg-white rounded-lg shadow-lg">
+                        <div class="flex pt-2 px-2">
+                            <div class="w-40 hover:scale-95">
+                                <p class="text-2xl font-bold text-center"></p>
+                            </div>
+                            <div class="w-30 hover:scale-95 border-b">
+                                <p class="text-2xl font-black text-center p-2">Lunes</p>
+                            </div>
+                            <div class="w-30 hover:scale-95 border-b">
+                                <p class="text-2xl font-black text-center p-2">Martes</p>
+                            </div>
+                            <div class="w-30 hover:scale-95 border-b">
+                                <p class="text-2xl font-black text-center p-2">Miercoles</p>
+                            </div>
+                            <div class="w-30 hover:scale-95 border-b">
+                                <p class="text-2xl font-black text-center p-2">Jueves</p>
+                            </div>
+                            <div class="w-30 hover:scale-95 border-b">
+                                <p class="text-2xl font-black text-center p-2">Vierves</p>
+                            </div>
+                            <div class="w-30 hover:scale-95 border-b">
+                                <p class="text-2xl font-black text-center p-2">Sábado</p>
+                            </div>
+                            <div class="w-30 hover:scale-95 border-b">
+                                <p class="text-2xl font-black text-center p-2">Domingo</p>
+                            </div>
+                            <div class="w-30 hover:scale-95 border-b">
+                                <p class="text-2xl font-black text-center p-2">Total</p>
+                            </div>
+                        </div>
+                        <div class="flex px-2">
+                            <div class="w-40 hover:scale-95">
+                                <p class="text-xl font-black text-center border-b p-2">Mamposteria</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{(+arrayMamposteriaCarga[0].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{(+arrayMamposteriaCarga[1].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{(+arrayMamposteriaCarga[2].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{(+arrayMamposteriaCarga[3].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{(+arrayMamposteriaCarga[4].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{ (+arrayMamposteriaCarga[5].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{ (+arrayMamposteriaCarga[6].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-white bg-slate-100">{{(+sumaTotalBlockCarga.toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                        </div>
+                        <div class="flex px-2">
+                            <div class="w-40 hover:scale-95">
+                                <p class="text-xl font-black text-center border-b p-2">Dintel</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{(+arrayDintelCarga[0].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{(+arrayDintelCarga[1].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{(+arrayDintelCarga[2].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{(+arrayDintelCarga[3].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{(+arrayDintelCarga[4].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{ (+arrayDintelCarga[5].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{ (+arrayDintelCarga[6].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-white bg-slate-100">{{(+sumaTotalDintelesCarga.toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                        </div>
+                        <div class="flex px-2">
+                            <div class="w-40 hover:scale-95">
+                                <p class="text-xl font-black text-center border-b p-2">Grout</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{(+arrayGroutCarga[0].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{(+arrayGroutCarga[1].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{(+arrayGroutCarga[2].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{(+arrayGroutCarga[3].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{(+arrayGroutCarga[4].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{ (+arrayGroutCarga[5].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{ (+arrayGroutCarga[6].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-white bg-slate-100">{{(+sumaTotalGroutsCarga.toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                        </div>
+                        <div class="flex px-2 pb-2">
+                            <div class="w-40 hover:scale-95">
+                                <p class="text-xl font-black text-center border-b p-2">Mortero</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{(+arrayMorteroCarga[0].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{(+arrayMorteroCarga[1].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{(+arrayMorteroCarga[2].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{(+arrayMorteroCarga[3].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{(+arrayMorteroCarga[4].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{ (+arrayMorteroCarga[5].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-slate-100">{{ (+arrayMorteroCarga[6].toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                            <div class="w-30 hover:scale-95">
+                                <p class="text-xl text-center border-b p-2 hover:bg-white bg-slate-100">{{(+sumaTotalMorterosCarga.toFixed(2)).toLocaleString('de-DE')}}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h2 class="text-3xl font-black text-center uppercase mt-4">Por Despachar en la Semana</h2>
+                    <div class="flex justify-around gap-4">
+                        <div class="w-60 flex flex-col p-4 shadow-xl hover:scale-95 rounded-lg bg-white">
+                            <p class="text-2xl font-bold text-center">{{(+totalInventarioMampuesto.toFixed(2)).toLocaleString('de-DE')}}</p>
+                            <h3 class="font-semibold opacity-80 text-lg text-center">Mamposteria</h3>
+                        </div>
+                        <div class="w-60 flex flex-col p-4 shadow-xl hover:scale-95 rounded-lg bg-white">
+                            <p class="text-2xl font-bold text-center">{{(+totalInventarioDinteles.toFixed(2)).toLocaleString('de-DE')}}</p>
+                            <h3 class="font-semibold opacity-80 text-lg text-center">Dinteles</h3>
+                        </div>
+                        <div class="w-60 flex flex-col p-4 shadow-xl hover:scale-95 rounded-lg bg-white">
+                            <p class="text-2xl font-bold text-center">{{(+totalInventarioGrouts.toFixed(2)).toLocaleString('de-DE')}}</p>
+                            <h3 class="font-semibold opacity-80 text-lg text-center">Grouts</h3>
+                        </div>
+                        <div class="w-60 flex flex-col p-4 shadow-xl hover:scale-95 rounded-lg bg-white">
+                            <p class="text-2xl font-bold text-center">{{(+totalInventarioMorteros.toFixed(2)).toLocaleString('de-DE')}}</p>
+                            <h3 class="font-semibold opacity-80 text-lg text-center">Morteros</h3>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </ng-container>
+
+        <ng-container *ngIf="!page">
+            <div class="flex flex-col flex-auto min-w-0">
+
+
+                <!-- Main -->
+                <div class="flex-auto border-t -mt-px ">
+                    <div class="w-full max-w-screen-xl mx-auto">
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full mt-8">
+                            <!-- Visitors overview -->
+                            <div
+                                class="sm:col-span-2 lg:col-span-3  flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden">
+
+                                <div class="flex flex-col flex-auto" style="
+                                            display: flex;
+                                            justify-content: center;
+                                            align-items: center;
+                                        ">
+                                    <div class="flex flex-auto overflow-hidden" style="overflow: auto !important;    width: 90%;
+                        ">
+
+                                        <!-- Products list -->
+                                        <div class="flex flex-col flex-auto  overflow-hidden sm:overflow-y-auto"
+                                            style="overflow: auto !important;">
+
+
+                                            <div class=" mat-elevation-z8" style="text-align: center;">
+
+                                                <ng-container>
+                                                    <ng-container *ngIf="dataI?.length > 0; else noProducts">
+                                                        <div class="grid">
+                                                            <!-- Header -->
+                                                            <div class="inventory-grid z-10 sticky top-0 grid gap-4 py-4 px-6 md:px-8 shadow text-md font-semibold text-secondary bg-gray-50 dark:bg-black dark:bg-opacity-5"
+                                                                matSort matSortDisableClear>
+
+                                                                <div class="hidden md:block" [mat-sort-header]="'date'">
+                                                                    Día de Despacho
+                                                                </div>
+                                                                <div [mat-sort-header]="'name'">Proyecto</div>
+                                                                <div class="hidden sm:block" [mat-sort-header]="'price'">
+                                                                    Dirección
+                                                                </div>
+                                                                <div class="hidden lg:block" [mat-sort-header]="'stock'">
+                                                                    Transporte
+                                                                </div>
+
+                                                                <div class="hidden sm:block">Estado</div>
+                                                            </div>
+                                                            <!-- Rows -->
+                                                            <ng-container>
+                                                                <ng-container *ngFor="let product of dataI">
+
+                                                                    <div
+                                                                        class="inventory-grid grid items-center gap-4 py-3 px-6 md:px-8 border-b">
+                                                                        <div class="hidden md:block ">
+                                                                            {{ product.date | date:'EEEE d':'-0500':'es' }}
+                                                                        </div>
+                                                                        <!-- Image -->
+                                                                        <div class="flex items-center">
+                                                                            <div
+                                                                                class="relative md:block flex flex-0 items-center justify-center   overflow-hidden ">
+
+                                                                                {{ product.client }}
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <!-- Name -->
+                                                                        <div class="md:block">
+                                                                            {{ product.direction }}
+                                                                        </div>
+
+                                                                        <!-- Price -->
+                                                                        <div class="hidden sm:block">
+                                                                            {{ product.driver }}
+                                                                        </div>
+
+
+                                                                        <!-- Active -->
+                                                                        <div class="hidden lg:block">
+                                                                            <mat-chip-set aria-label="Dog selection">
+
+
+                                                                                <mat-chip
+                                                                                    *ngIf="product.status === 'string'"
+                                                                                    style="background-color: #f43f5e;">
+                                                                                    <span
+                                                                                        style="font-weight: 900; color: white;">CANCELADO</span>
+                                                                                </mat-chip>
+                                                                                <mat-chip
+                                                                                    *ngIf="product.status === 'Cancelado' ||  product.status === 'Anulado'"
+                                                                                    style="background-color: #f43f5e;">
+                                                                                    <span
+                                                                                        style="font-weight: 900; color: white;">ANULADO</span>
+                                                                                </mat-chip>
+
+                                                                                <mat-chip
+                                                                                    *ngIf="product.status === 'Prendiente' ||  product.status === 'Preliminar'"
+                                                                                    style="background-color: #ffff5a;">
+                                                                                    <span
+                                                                                        style="font-weight: 900;">PRELIMINAR</span>
+                                                                                </mat-chip>
+
+
+                                                                                <mat-chip
+                                                                                    *ngIf="product.status === 'Despachado' ||  product.status === 'Despachado'"
+                                                                                    style="background-color: #daa0e1;">
+                                                                                    <span
+                                                                                        style="font-weight: 900;">DESPACHADO</span>
+                                                                                </mat-chip>
+
+                                                                                <mat-chip
+                                                                                    *ngIf="product.status === 'Reprogramado'||  product.status === 'Reprogramado'"
+                                                                                    style="background-color: #6e3322;">
+                                                                                    <span
+                                                                                        style="font-weight: 900; color: white;">REPROGRAMADO</span>
+                                                                                </mat-chip>
+
+                                                                                <mat-chip
+                                                                                    *ngIf="product.status === 'Aprobado' ||  product.status === 'Confirmado'"
+                                                                                    style="background-color: #09a837;">
+                                                                                    <span
+                                                                                        style="font-weight: 900; color: white;">CONFIRMADO</span>
+                                                                                </mat-chip>
+                                                                            </mat-chip-set>
+
+                                                                        </div>
+
+                                                                        <!-- Details button -->
+                                                                        <div>
+                                                                            <button
+                                                                                class="min-w-10 min-h-7 h-7 px-2 leading-6"
+                                                                                mat-stroked-button
+                                                                                (click)="toggleDetails(product._id)">
+                                                                                <mat-icon class="icon-size-5"
+                                                                                    [svgIcon]="selectedProduct?._id === product._id ? 'heroicons_solid:chevron-up' : 'heroicons_solid:chevron-down'"></mat-icon>
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="grid">
+                                                                        <ng-container
+                                                                            *ngIf="selectedProduct?._id === product._id">
+                                                                            <ng-container
+                                                                                *ngTemplateOutlet="rowDetailsTemplate; context: {$implicit: product}"></ng-container>
+
+                                                                            <ng-container
+                                                                                *ngTemplateOutlet="rowDetailsTemplate2; context: {$implicit: product}"></ng-container>
+
+                                                                        </ng-container>
+                                                                    </div>
+
+                                                                </ng-container>
+                                                            </ng-container>
+                                                        </div>
+
+
+                                                    </ng-container>
+                                                </ng-container>
+
+                                                <ng-template #rowDetailsTemplate let-product>
+                                                    <div *ngIf="rolLogin.toUpperCase() !=='SERVICIO AL CLIENTE'" class="shadow-lg overflow-hidden">
+
+                                                        <div class="flex flex-col mt-4 mb-4 pt-6 border-t space-y-8">
+                                                            <ng-container class="flex flex-col">
+                                                                <ng-container>
+                                                                    <div class="flex justify-end items-center gap-3 mt-3">
+                                                                        <button class="bg-blue-700 hover:bg-blue-800 rounded-full text-white font-bold uppercase p-2 w-30" (click)="showModal('guia')">
+                                                                            Guía
+                                                                        </button>
+                                                                        <button class="bg-blue-700 hover:bg-blue-800 rounded-full text-white font-bold uppercase p-2 w-30" (click)="showModal('pre')">
+                                                                            Pre-Guía
+                                                                        </button>
+                                                                        <button class="bg-blue-700 hover:bg-blue-800 rounded-full text-white font-bold uppercase p-2 w-30" (click)="servicioDespacho()">
+                                                                            Despachar
+                                                                        </button>
+                                                                        <button class="bg-blue-700 hover:bg-blue-800 rounded-full text-white font-bold uppercase p-2 w-30" (click)="showModal('factura')">
+                                                                            Factura
+                                                                        </button>
+
+                                                                    </div>
+                                                                    <div *ngIf="openModal" class="fixed top-0 left-0 flex justify-center items-center w-full h-full bg-black bg-opacity-50 z-50">
+                                                                        <div class="bg-white rounded-lg shadow-lg p-6 max-w-2xl">
+                                                                            <div class="flex justify-between items-center text-2xl uppercase font-black gap-5">
+                                                                                <h3 class="text-xl font-semibold text-center border-b-2">Descarga de Archivos</h3>
+                                                                                <button class="text-gray-400 hover:text-gray-600 text-xl" (click)="showModal('')">
+                                                                                    x
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="text-center mt-3 p-5">
+                                                                                <!-- Contenido Modal -->
+                                                                                <div class="flex flex-col gap-3 justify-center items-center">
+                                                                                    <ng-container *ngIf="showDiv === 'guia'">
+                                                                                        <div class="flex gap-3 justify-center items-center">
+                                                                                            <p class="text-xl">Guía</p>
+                                                                                            <div class="w-10 h-10">
+                                                                                                <svg class="hover:opacity-50" (click)="servicioGuia()" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
+                                                                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 8.25H7.5a2.25 2.25 0 0 0-2.25 2.25v9a2.25 2.25 0 0 0 2.25 2.25h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25H15M9 12l3 3m0 0 3-3m-3 3V2.25" />
+                                                                                                </svg>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </ng-container>
+                                                                                    <ng-container *ngIf="showDiv === 'pre'">
+                                                                                        <div id="pre" class="flex gap-3 justify-center items-center">
+                                                                                            <p class="text-xl">Pre-Guía</p>
+                                                                                            <div class="w-10 h-10">
+                                                                                                <svg class="hover:opacity-50" (click)="servicioPreGuia()" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
+                                                                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 8.25H7.5a2.25 2.25 0 0 0-2.25 2.25v9a2.25 2.25 0 0 0 2.25 2.25h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25H15M9 12l3 3m0 0 3-3m-3 3V2.25" />
+                                                                                                </svg>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </ng-container>
+
+
+
+                                                                                    <ng-container *ngIf="showDiv === 'factura'">
+                                                                                        <div id="factura" class="flex gap-3 justify-center items-center">
+                                                                                            <p class="text-xl">Factura</p>
+                                                                                            <div class="w-10 h-10">
+                                                                                                <svg class="hover:opacity-50" (click)="servicioPreGuia()" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
+                                                                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 8.25H7.5a2.25 2.25 0 0 0-2.25 2.25v9a2.25 2.25 0 0 0 2.25 2.25h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25H15M9 12l3 3m0 0 3-3m-3 3V2.25" />
+                                                                                                </svg>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </ng-container>
+                                                                                </div>
+
+                                                                            </div>
+                                                                            <div class="flex justify-end items-end">
+                                                                                <button class=" mt-5 w-30 text-center bg-red-600 hover:bg-red-700 uppercase p-2 rounded-full text-white font-black" (click)="showModal()">Close</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </ng-container>
+
+                                                                <div
+                                                                    class="flex flex-1 sm:items-center text-center justify-center">
+                                                                    <div class=" mt-2 text-2xl  font-bold truncate">Detalle
+                                                                        del Proyecto
+                                                                    </div>
+                                                                </div>
+                                                            </ng-container>
+
+                                                            <!-- Title -->
+                                                            <div class="grid grid-rows-2 grid-flow-col gap-2">
+                                                                <div>
+                                                                    <ng-container>
+                                                                        <div class="flex flex-1 sm:items-center">
+                                                                            <mat-icon
+                                                                                [svgIcon]="'heroicons_outline:briefcase'"></mat-icon>
+                                                                            <div class="ml-6 leading-6">
+                                                                                <b>Proyecto:</b> {{
+                                                                                selectedProduct.client
+                                                                                }}
+                                                                            </div>
+                                                                        </div>
+                                                                    </ng-container>
+                                                                </div>
+
+                                                                <div>
+                                                                    <!-- Company -->
+                                                                    <ng-container>
+                                                                        <div class="flex flex-1 sm:items-center">
+                                                                            <mat-icon
+                                                                                [svgIcon]="'heroicons_outline:building-office-2'"></mat-icon>
+                                                                            <div class="ml-6 leading-6">
+                                                                                <b>Vehículo:</b> {{
+                                                                                selectedProduct.direction
+                                                                                }}
+                                                                            </div>
+                                                                        </div>
+                                                                    </ng-container>
+
+                                                                </div>
+
+                                                                <div>
+                                                                    <ng-container>
+                                                                        <div class="flex flex-1 sm:items-center">
+                                                                            <mat-icon
+                                                                                [svgIcon]="'heroicons_outline:building-office-2'"></mat-icon>
+                                                                            <div class="ml-6 leading-6">
+                                                                                <b>Dirección:</b> {{
+                                                                                selectedProduct.direction
+                                                                                }}
+                                                                            </div>
+                                                                        </div>
+                                                                    </ng-container>
+
+                                                                </div>
+
+                                                                <div>
+                                                                    <ng-container>
+                                                                        <div class="flex sm:items-center">
+                                                                            <mat-icon
+                                                                                [svgIcon]="'heroicons_outline:building-office-2'"></mat-icon>
+                                                                            <div class="ml-6 leading-6">
+                                                                                <b>Conductor:</b> {{
+                                                                                selectedProduct.direction
+                                                                                }}
+                                                                            </div>
+                                                                        </div>
+                                                                    </ng-container>
+
+                                                                </div>
+
+                                                                <div>
+                                                                    <ng-container>
+                                                                        <div class="flex flex-1 sm:items-center">
+                                                                            <mat-icon
+                                                                                [svgIcon]="'heroicons_outline:building-office-2'"></mat-icon>
+                                                                            <div class="ml-6 leading-6">
+                                                                                <b>Fecha de
+                                                                                    Despacho:</b> {{
+                                                                                selectedProduct.date |
+                                                                                date:'EEEE d':'-0500':'es'
+                                                                                }}
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </ng-container>
+                                                                </div>
+
+                                                                <div>
+                                                                    <ng-container>
+                                                                        <div class="flex sm:items-center">
+                                                                            <mat-icon
+                                                                                [svgIcon]="'heroicons_outline:building-office-2'"></mat-icon>
+                                                                            <div class="ml-6 leading-6">
+                                                                                <b>Placa:</b> {{
+                                                                                selectedProduct.direction
+                                                                                }}
+                                                                            </div>
+                                                                        </div>
+                                                                    </ng-container>
+
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                                <h2 class="font-bold">Mamposteria</h2>
+                                                            </div>
+                                                            <table class="border border-black" style="display: table;">
+                                                                <thead class="border border-black">
+                                                                    <tr class="border border-black">
+                                                                        <th class="border border-black">Detalle</th>
+                                                                        <th class="border border-black">Unidad</th>
+                                                                        <th class="border border-black">Despacho</th>
+                                                                        <th class="border border-black">Total a Despachar
+                                                                        </th>
+                                                                        <th class="border border-black">Carga</th>
+                                                                        <th class="border border-black">Total Despachado
+                                                                        </th>
+                                                                        <th class="border border-black">Novedad</th>
+                                                                        <th class="border border-black">Comentarios</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody class="border border-black"
+                                                                    *ngFor="let prod of selectedProduct.block">
+                                                                    <tr class="border border-black">
+
+                                                                        <td class="border border-black"
+                                                                            *ngIf="prod.despacho > 0">{{ prod.detalle }}
+                                                                        </td>
+                                                                        <td class="border border-black"
+                                                                            *ngIf="prod.despacho > 0">{{ prod.m2 }}
+                                                                        </td>
+                                                                        <td class="border border-black"
+                                                                            *ngIf="prod.despacho > 0">{{ prod.despacho }}
+                                                                        </td>
+                                                                        <td class="border border-black"
+                                                                            *ngIf="prod.despacho > 0">{{ prod.totalDespachar
+                                                                            }}
+                                                                        </td>
+                                                                        <td class="border border-black"
+                                                                            *ngIf="prod.despacho > 0">{{ prod.carga }}
+                                                                        </td>
+                                                                        <td class="border border-black"
+                                                                            *ngIf="prod.despacho > 0">{{prod.totalDespacho }}
+                                                                        </td>
+                                                                        <td class="border border-black"
+                                                                            *ngIf="prod.despacho > 0">{{ prod.novedades }}
+                                                                        </td>
+                                                                        <td class="border border-black"
+                                                                            *ngIf="prod.despacho > 0">{{ prod.comentarios }}
+                                                                        </td>
+
+                                                                    </tr>
+
+                                                                </tbody>
+                                                            </table>
+
+                                                            <div>
+                                                                <h2 class="font-bold">Grouts</h2>
+                                                            </div>
+                                                            <table class="border border-black" style="display: table;">
+                                                                <thead class="border border-black">
+                                                                    <tr class="border border-black">
+                                                                        <th class="border border-black">Detalle</th>
+                                                                        <th class="border border-black">Unidad</th>
+                                                                        <th class="border border-black">Despacho</th>
+                                                                        <th class="border border-black">Total a Despachar
+                                                                        </th>
+                                                                        <th class="border border-black">Carga</th>
+                                                                        <th class="border border-black">Total Despachado
+                                                                        </th>
+                                                                        <th class="border border-black">Novedad</th>
+                                                                        <th class="border border-black">Comentarios</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody class="border border-black"
+                                                                    *ngFor="let prod of selectedProduct.grout">
+                                                                    <tr class="border border-black">
+                                                                        <td class="border border-black"
+                                                                            *ngIf="prod.despacho > 0">{{ prod.detalle }}
+                                                                        </td>
+                                                                        <td class="border border-black"
+                                                                            *ngIf="prod.despacho > 0">{{ prod.m2 }}
+                                                                        </td>
+                                                                        <td class="border border-black"
+                                                                            *ngIf="prod.despacho > 0">{{ prod.despacho }}
+                                                                        </td>
+                                                                        <td class="border border-black"
+                                                                            *ngIf="prod.despacho > 0">{{
+                                                                            prod.totalDespachar }}
+                                                                        </td>
+                                                                        <td class="border border-black"
+                                                                            *ngIf="prod.despacho > 0">{{ prod.carga }}
+                                                                        </td>
+                                                                        <td class="border border-black"
+                                                                            *ngIf="prod.despacho > 0">{{
+                                                                            prod.totalDespacho }}
+                                                                        </td>
+                                                                        <td class="border border-black"
+                                                                            *ngIf="prod.despacho > 0">{{ prod.novedades }}
+                                                                        </td>
+                                                                        <td class="border border-black"
+                                                                            *ngIf="prod.despacho > 0">{{ prod.comentarios
+                                                                            }}
+                                                                        </td>
+                                                                    </tr>
+
+                                                                </tbody>
+                                                            </table>
+
+                                                            <div>
+                                                                <h2 class="font-bold">Morteros</h2>
+                                                            </div>
+                                                            <table class="border border-black" style="display: table;">
+                                                                <thead class="border border-black">
+                                                                    <tr class="border border-black">
+                                                                        <th class="border border-black">Detalle</th>
+                                                                        <th class="border border-black">Unidad</th>
+                                                                        <th class="border border-black">Despacho</th>
+                                                                        <th class="border border-black">Total a Despachar
+                                                                        </th>
+                                                                        <th class="border border-black">Carga</th>
+                                                                        <th class="border border-black">Total Despachado
+                                                                        </th>
+                                                                        <th class="border border-black">Novedad</th>
+                                                                        <th class="border border-black">Comentarios</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody class="border border-black"
+                                                                    *ngFor="let prod of selectedProduct.morteros">
+                                                                    <tr class="border border-black">
+                                                                        <td class="border border-black"
+                                                                            *ngIf="prod.despacho > 0">{{ prod.detalle }}
+                                                                        </td>
+                                                                        <td class="border border-black"
+                                                                            *ngIf="prod.despacho > 0">{{ prod.m2 }}
+                                                                        </td>
+                                                                        <td class="border border-black"
+                                                                            *ngIf="prod.despacho > 0">{{ prod.despacho }}
+                                                                        </td>
+                                                                        <td class="border border-black"
+                                                                            *ngIf="prod.despacho > 0">{{
+                                                                            prod.totalDespachar }}
+                                                                        </td>
+                                                                        <td class="border border-black"
+                                                                            *ngIf="prod.despacho > 0">{{ prod.carga }}
+                                                                        </td>
+                                                                        <td class="border border-black"
+                                                                            *ngIf="prod.despacho > 0">{{
+                                                                            prod.totalDespacho }}
+                                                                        </td>
+                                                                        <td class="border border-black"
+                                                                            *ngIf="prod.despacho > 0">{{ prod.novedades }}
+                                                                        </td>
+                                                                        <td class="border border-black"
+                                                                            *ngIf="prod.despacho > 0">{{ prod.comentarios
+                                                                            }}
+                                                                        </td>
+                                                                    </tr>
+
+                                                                </tbody>
+                                                            </table>
+
+                                                            <div>
+                                                                <h2 class="font-bold">Dinteles</h2>
+                                                            </div>
+                                                            <table class="border border-black" style="display: table;">
+                                                                <thead class="border border-black">
+                                                                    <tr class="border border-black">
+                                                                        <th class="border border-black">Detalle</th>
+                                                                        <th class="border border-black">Unidad</th>
+                                                                        <th class="border border-black">Despacho</th>
+                                                                        <th class="border border-black">Total a Despachar
+                                                                        </th>
+                                                                        <th class="border border-black">Carga</th>
+                                                                        <th class="border border-black">Total Despachado
+                                                                        </th>
+                                                                        <th class="border border-black">Novedad</th>
+                                                                        <th class="border border-black">Comentarios</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody class="border border-black"
+                                                                    *ngFor="let prod of selectedProduct.dintel">
+                                                                    <tr class="border border-black">
+                                                                        <td class="border border-black"
+                                                                            *ngIf="prod.despacho > 0">{{ prod.detalle }}
+                                                                        </td>
+                                                                        <td class="border border-black"
+                                                                            *ngIf="prod.despacho > 0">{{ prod.m2 }}
+                                                                        </td>
+                                                                        <td class="border border-black"
+                                                                            *ngIf="prod.despacho > 0">{{ prod.despacho }}
+                                                                        </td>
+                                                                        <td class="border border-black"
+                                                                            *ngIf="prod.despacho > 0">{{
+                                                                            prod.totalDespachar }}
+                                                                        </td>
+                                                                        <td class="border border-black"
+                                                                            *ngIf="prod.despacho > 0">{{ prod.carga }}
+                                                                        </td>
+                                                                        <td class="border border-black"
+                                                                            *ngIf="prod.despacho > 0">{{
+                                                                            prod.totalDespacho }}
+                                                                        </td>
+                                                                        <td class="border border-black"
+                                                                            *ngIf="prod.despacho > 0">{{ prod.novedades }}
+                                                                        </td>
+                                                                        <td class="border border-black"
+                                                                            *ngIf="prod.despacho > 0">{{ prod.comentarios
+                                                                            }}
+                                                                        </td>
+                                                                    </tr>
+
+                                                                </tbody>
+                                                            </table>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </ng-template>
+
+
+                                                <!--Formulario -->
+
+                                                <ng-template #rowDetailsTemplate2 let-product>
+
+
+
+                                                    <div *ngIf="rolLogin.toUpperCase() ==='SERVICIO AL CLIENTE'"
+                                                        class="shadow-lg overflow-hidden">
+                                                        <ng-container>
+                                                            <div class="flex justify-end items-center gap-3 mt-3">
+                                                                <button class="bg-blue-700 hover:bg-blue-800 rounded-full text-white font-bold uppercase p-2 w-30" (click)="showModal('guia')">
+                                                                    Guía
+                                                                </button>
+                                                                <button class="bg-blue-700 hover:bg-blue-800 rounded-full text-white font-bold uppercase p-2 w-30" (click)="showModal('pre')">
+                                                                    Pre-Guía
+                                                                </button>
+                                                                <button class="bg-blue-700 hover:bg-blue-800 rounded-full text-white font-bold uppercase p-2 w-30" (click)="servicioDespacho()">
+                                                                    Despachar
+                                                                </button>
+                                                                <button class="bg-blue-700 hover:bg-blue-800 rounded-full text-white font-bold uppercase p-2 w-30" (click)="showModal('factura')">
+                                                                    Factura
+                                                                </button>
+                                                            </div>
+
+                                                            <div *ngIf="openModal" class="fixed top-0 left-0 flex justify-center items-center w-full h-full bg-black bg-opacity-50 z-50">
+                                                                <div class="bg-white rounded-lg shadow-lg p-6 max-w-2xl">
+                                                                    <div class="flex justify-between items-center text-2xl uppercase font-black gap-5">
+                                                                        <h3 class="text-xl font-semibold text-center">Descarga de Archivos</h3>
+                                                                        <button class="text-gray-400 hover:text-gray-600 text-xl" (click)="showModal()">
+                                                                            x
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="text-center mt-3">
+                                                                        <!-- Contenido Modal -->
+                                                                        <div class="flex flex-col gap-3 justify-center items-end mr-10">
+                                                                            <ng-container *ngIf="showDiv === 'guia'">
+                                                                                <div class="flex gap-3 justify-center items-center ">
+                                                                                    <p class="text-xl">Guía</p>
+                                                                                    <div class="w-10 h-10">
+                                                                                        <svg class="hover:opacity-50" (click)="servicioPreGuia()" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
+                                                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 8.25H7.5a2.25 2.25 0 0 0-2.25 2.25v9a2.25 2.25 0 0 0 2.25 2.25h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25H15M9 12l3 3m0 0 3-3m-3 3V2.25" />
+                                                                                        </svg>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </ng-container>
+                                                                            <ng-container *ngIf="showDiv === 'pre'">
+                                                                                <div id="pre" class="flex gap-3 justify-center items-center">
+                                                                                    <p class="text-xl">Pre-Guía</p>
+                                                                                    <div class="w-10 h-10">
+                                                                                        <svg class="hover:opacity-50" (click)="servicioPreGuia()" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
+                                                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 8.25H7.5a2.25 2.25 0 0 0-2.25 2.25v9a2.25 2.25 0 0 0 2.25 2.25h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25H15M9 12l3 3m0 0 3-3m-3 3V2.25" />
+                                                                                        </svg>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </ng-container>
+                                                                            <ng-container *ngIf="showDiv === 'factura'">
+                                                                                <div id="factura" class="flex gap-3 justify-center items-center">
+                                                                                    <p class="text-xl">Factura</p>
+                                                                                    <div class="w-10 h-10">
+                                                                                        <svg class="hover:opacity-50" (click)="servicioPreGuia()" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
+                                                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 8.25H7.5a2.25 2.25 0 0 0-2.25 2.25v9a2.25 2.25 0 0 0 2.25 2.25h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25H15M9 12l3 3m0 0 3-3m-3 3V2.25" />
+                                                                                        </svg>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </ng-container>
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="flex justify-end items-end">
+                                                                        <button class=" mt-5 w-30 text-center bg-red-600 hover:bg-red-700 uppercase p-2 rounded-full text-white font-black" (click)="showModal()">Close</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </ng-container>
+
+                                                        <form [formGroup]="this.range">
+                                                            <mat-form-field class="example-full-width px-[24px]"
+                                                                style="width: 100%;">
+                                                                <mat-label>Fecha</mat-label>
+
+                                                                <input formControlName='start' type="date" id="date"
+                                                                    matInput>
+                                                                <mat-error>Es requerido</mat-error>
+                                                            </mat-form-field>
+                                                        </form>
+
+
+                                                        <mat-form-field class="example-full-width px-[24px]"
+                                                            style="width: 100%;">
+                                                            <mat-label>Proyecto</mat-label>
+                                                            <input [(ngModel)]="client"
+                                                                [ngModelOptions]="{standalone: true}" matInput
+                                                                placeholder="Ex. Perez" maxLength="200"
+                                                                oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                                                onkeypress="return ' QWERTYUIOPÑLKJHGFDSAZXCVBNMáéíóúabcdefghijklmnñopqrstuvwxyz1234567890'.includes(event.key)"
+                                                                required>
+                                                        </mat-form-field>
+
+
+                                                        <mat-form-field class="example-full-width px-[24px]"
+                                                            style="width: 100%;">
+                                                            <mat-label style="color: #1e293b">Dirección</mat-label>
+                                                            <input [(ngModel)]="direction"
+                                                                [ngModelOptions]="{standalone: true}" matInput
+                                                                style="color: #1e293b" placeholder="Ex. MarcoPerez"
+                                                                type="text" maxlength="300"
+                                                                oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                                                required>
+                                                        </mat-form-field>
+
+                                                        <mat-label class="px-[24px]">Vehículo *</mat-label>
+                                                        <div class="ng-autocomplete example-full-width px-[24px]">
+                                                            <ng-autocomplete [data]="vehiculo" [searchKeyword]="keyword"
+                                                                [placeholder]="driver? driver: 'Seleccione su vehiculo'"
+                                                                (selected)='selectEventDriver($event)'
+                                                                (inputChanged)='onChangeSearch($event)'
+                                                                (inputFocused)='onFocused($event)'
+                                                                [itemTemplate]="itemTemplate"
+                                                                [notFoundTemplate]="notFoundTemplate">
+                                                            </ng-autocomplete>
+
+                                                            <ng-template #itemTemplate let-item>
+                                                                <a [innerHTML]="item.tipo"></a>
+                                                            </ng-template>
+
+                                                            <ng-template #notFoundTemplate let-notFound>
+                                                                <div [innerHTML]="notFound"></div>
+                                                            </ng-template>
+                                                        </div>
+
+                                                        <mat-form-field class="example-full-width px-[24px]"
+                                                            style="width: 100%;">
+                                                            <mat-label style="color: #1e293b">Conductor</mat-label>
+                                                            <input [(ngModel)]="driver"
+                                                                [ngModelOptions]="{standalone: true}" matInput
+                                                                style="color: #1e293b" placeholder="Ex. Marco Perez"
+                                                                type="text" maxlength="300"
+                                                                oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                                                required>
+                                                        </mat-form-field>
+
+                                                        <mat-form-field class="example-full-width px-[24px]"
+                                                            style="width: 100%;">
+                                                            <mat-label style="color: #1e293b">Placa</mat-label>
+                                                            <input [(ngModel)]="plate" [ngModelOptions]="{standalone: true}"
+                                                                matInput style="color: #1e293b" placeholder="Ex. PDR1234"
+                                                                type="text" maxlength="300"
+                                                                oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                                                required>
+                                                        </mat-form-field>
+
+                                                        <div class="ng-autocomplete example-full-width px-[24px]">
+                                                            <mat-label class="px-[24px]">Estado *</mat-label>
+                                                            <ng-autocomplete [data]="estados" [searchKeyword]="keyword"
+                                                                [placeholder]="status? status: ''"
+                                                                (selected)='selectEventStado($event)'
+                                                                (inputChanged)='onChangeSearch($event)'
+                                                                (inputFocused)='onFocused($event)'
+                                                                [itemTemplate]="itemTemplate"
+                                                                [notFoundTemplate]="notFoundTemplate">
+                                                            </ng-autocomplete>
+
+                                                            <ng-template #itemTemplate let-item>
+                                                                <a [innerHTML]="item.tipo"></a>
+                                                            </ng-template>
+
+                                                            <ng-template #notFoundTemplate let-notFound>
+                                                                <div [innerHTML]="notFound"></div>
+                                                            </ng-template>
+                                                        </div>
+
+
+                                                        <h2>Mampostería</h2>
+
+                                                        <table>
+
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Detalle</th>
+                                                                    <th>M2/Unidad</th>
+                                                                    <th>Despacho</th>
+                                                                    <th>Total Despachar</th>
+                                                                    <th>Carga</th>
+                                                                    <th>Total Despachado</th>
+                                                                    <th>Novedades</th>
+                                                                    <th>Comentarios</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <h2>Sin Bisel</h2>
+                                                                <tr>
+                                                                    <td>10</td>
+                                                                    <td>8.09</td>
+                                                                    <td>
+                                                                        <input [(ngModel)]="m210"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('8.09',m210,'m210Total')"
+                                                                        >
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="m210Total"></td>
+                                                                    <td>
+                                                                        <input [(ngModel)]="m210Carga"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('8.09',m210Carga,'m210CargaTotal')"
+                                                                        >
+                                                                    </td>
+                                                                    <td><input type="number" [(ngModel)]="m210CargaTotal"></td>
+                                                                    <td><input type="text" [(ngModel)]="m210Novedades"></td>
+                                                                    <td><input type="text" [(ngModel)]="m210Comentarios"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>12</td>
+                                                                    <td>8.09</td>
+                                                                    <td><input [(ngModel)]="m212"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('8.09',m212,'m212Total')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="m212Total"></td>
+                                                                    <td>
+                                                                        <input [(ngModel)]="m212Carga"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('8.09',m212Carga,'m212CargaTotal')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="m212CargaTotal"></td>
+                                                                    <td><input type="text" [(ngModel)]="m212Novedades"></td>
+                                                                    <td><input type="text" [(ngModel)]="m212Comentarios">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>20</td>
+                                                                    <td>8.09</td>
+                                                                    <td><input [(ngModel)]="m220"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('8.09',m220,'m220Total')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="m220Total"></td>
+                                                                    <td>
+                                                                        <input [(ngModel)]="m220Carga"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('8.09',m220Carga,'m220CargaTotal')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="m220CargaTotal"></td>
+                                                                    <td><input type="text" [(ngModel)]="m220Novedades"></td>
+                                                                    <td><input type="text" [(ngModel)]="m220Comentarios">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>25</td>
+                                                                    <td>8.09</td>
+                                                                    <td><input [(ngModel)]="m225"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('8.09',m225,'m225Total')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="m225Total"></td>
+                                                                    <td>
+                                                                        <input [(ngModel)]="m225Carga"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('8.09',m225Carga,'m225CargaTotal')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="m225CargaTotal"></td>
+                                                                    <td><input type="text" [(ngModel)]="m225Novedades"></td>
+                                                                    <td><input type="text" [(ngModel)]="m225Comentarios">
+                                                                    </td>
+                                                                </tr>
+
+                                                                <h2 class="w-18">Con Bisel</h2>
+                                                                <tr>
+                                                                    <td>10</td>
+                                                                    <td>8.09</td>
+                                                                    <td><input [(ngModel)]="m210c"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('8.09',m210c,'m210cTotal')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="m210cTotal"></td>
+                                                                    <td>
+                                                                        <input [(ngModel)]="m210cCarga"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('8.09',m210cCarga,'m210cCargaTotal')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="m210cCargaTotal"></td>
+                                                                    <td><input type="text" [(ngModel)]="m210cNovedades"></td>
+                                                                    <td><input type="text" [(ngModel)]="m210cComentarios">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>12</td>
+                                                                    <td>8.09</td>
+                                                                    <td><input [(ngModel)]="m212c"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('8.09',m212c,'m212cTotal')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="m212cTotal"></td>
+                                                                    <td>
+                                                                        <input [(ngModel)]="m212cCarga"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('8.09',m212cCarga,'m212cCargaTotal')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="m212cCargaTotal"></td>
+                                                                    <td><input type="text" [(ngModel)]="m212cNovedades"></td>
+                                                                    <td><input type="text" [(ngModel)]="m212cComentarios">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>20</td>
+                                                                    <td>8.09</td>
+                                                                    <td><input [(ngModel)]="m220c"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('8.09',m220c,'m220cTotal')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="m220cTotal"></td>
+                                                                    <td>
+                                                                        <input [(ngModel)]="m220cCarga"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('8.09',m220cCarga,'m220cCargaTotal')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="m220cCargaTotal"></td>
+                                                                    <td><input type="text" [(ngModel)]="m220cNovedades"></td>
+                                                                    <td><input type="text" [(ngModel)]="m220cComentarios">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>25</td>
+                                                                    <td>8.09</td>
+                                                                    <td><input [(ngModel)]="m225c"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('8.09',m225c,'m225cTotal')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="m225cTotal"></td>
+                                                                    <td>
+                                                                        <input [(ngModel)]="m225cCarga"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('8.09',m225cCarga,'m225cCargaTotal')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="m225cCargaTotal"></td>
+                                                                    <td><input type="text" [(ngModel)]="m225cNovedades"></td>
+                                                                    <td><input type="text" [(ngModel)]="m225cComentarios">
+                                                                    </td>
+                                                                </tr>
+
+                                                                <!-- Add more rows as needed -->
+                                                            </tbody>
+                                                        </table>
+
+                                                        <h2>Grouts</h2>
+
+                                                        <table>
+
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Detalle</th>
+                                                                    <th>M2/Unidad</th>
+                                                                    <th>Despacho</th>
+                                                                    <th>Total Despachar</th>
+                                                                    <th>Carga</th>
+                                                                    <th>Total Despachado</th>
+                                                                    <th>Novedades</th>
+                                                                    <th>Comentarios</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+
+                                                                <tr>
+                                                                    <td>Nivelación</td>
+                                                                    <td>60</td>
+                                                                    <td><input [(ngModel)]="n60"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('60',n60,'n60Total')"></td>
+                                                                    <td><input type="text" [(ngModel)]="n60Total"></td>
+                                                                    <td>
+                                                                        <input [(ngModel)]="n60Carga"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('60',n60Carga,'n60CargaTotal')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="n60CargaTotal"></td>
+                                                                    <td><input type="text" [(ngModel)]="n60Novedades"></td>
+                                                                    <td><input type="text" [(ngModel)]="n60Comentarios">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Estandar</td>
+                                                                    <td>60</td>
+                                                                    <td><input [(ngModel)]="e60"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('60',e60,'e60Total')"></td>
+                                                                    <td><input type="text" [(ngModel)]="e60Total"></td>
+                                                                    <td>
+                                                                        <input [(ngModel)]="e60Carga"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('60',e60Carga,'e60CargaTotal')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="e60CargaTotal"></td>
+                                                                    <td><input type="text" [(ngModel)]="e60Novedades"></td>
+                                                                    <td><input type="text" [(ngModel)]="e60Comentarios">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Plus</td>
+                                                                    <td>60</td>
+                                                                    <td><input [(ngModel)]="p60"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('60',p60,'p60Total')"></td>
+                                                                    <td><input type="text" [(ngModel)]="p60Total"></td>
+                                                                    <td>
+                                                                        <input [(ngModel)]="p60Carga"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('60',p60Carga,'p60CargaTotal')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="p60CargaTotal"></td>
+                                                                    <td><input type="text" [(ngModel)]="p60Novedades"></td>
+                                                                    <td><input type="text" [(ngModel)]="p60Comentarios">
+                                                                    </td>
+                                                                </tr>
+
+
+                                                                <!-- Add more rows as needed -->
+                                                            </tbody>
+                                                        </table>
+
+                                                        <h2>Morteros</h2>
+
+                                                        <table>
+
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Detalle</th>
+                                                                    <th>M2/Unidad</th>
+                                                                    <th>Despacho</th>
+                                                                    <th>Total Despachar</th>
+                                                                    <th>Carga</th>
+                                                                    <th>Total Despachado</th>
+                                                                    <th>Novedades</th>
+                                                                    <th>Comentarios</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>Estandar</td>
+                                                                    <td>60</td>
+                                                                    <td><input [(ngModel)]="es60"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('60',es60,'es60Total')"></td>
+                                                                    <td><input type="text" [(ngModel)]="es60Total"></td>
+                                                                    <td>
+                                                                        <input [(ngModel)]="es60Carga"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('60',es60Carga,'es60CargaTotal')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="es60CargaTotal"></td>
+                                                                    <td><input type="text" [(ngModel)]="es60Novedades"></td>
+                                                                    <td><input type="text" [(ngModel)]="es60Comentarios">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Plus</td>
+                                                                    <td>60</td>
+                                                                    <td><input [(ngModel)]="plus60"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('60',plus60,'plus60Total')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="plus60Total"></td>
+                                                                    <td>
+                                                                        <input [(ngModel)]="plus60Carga"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('60',plus60Carga,'plus60CargaTotal')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="plus60CargaTotal"></td>
+                                                                    <td><input type="text" [(ngModel)]="plus60Novedades"></td>
+                                                                    <td><input type="text" [(ngModel)]="plus60Comentarios">
+                                                                    </td>
+                                                                </tr>
+
+
+                                                                <!-- Add more rows as needed -->
+                                                            </tbody>
+                                                        </table>
+
+                                                        <h2>Recubrimientos</h2>
+
+                                                        <table>
+
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Detalle</th>
+                                                                    <th>Unidad</th>
+                                                                    <th>Despacho</th>
+                                                                    <th>Total Despachar</th>
+                                                                    <th>Carga</th>
+                                                                    <th>Total Despachado</th>
+                                                                    <th>Novedades</th>
+                                                                    <th>Comentarios</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>Deko</td>
+                                                                    <td>1</td>
+                                                                    <td><input [(ngModel)]="deko60"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('60',deko60,'deko60Total')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="deko60Total"></td>
+                                                                    <td>
+                                                                        <input [(ngModel)]="deko60Carga"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('60',deko60Carga,'deko60CargaTotal')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="deko60CargaTotal"></td>
+                                                                    <td><input type="text" [(ngModel)]="deko60Novedades"></td>
+                                                                    <td><input type="text" [(ngModel)]="deko60Comentarios">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Finish</td>
+                                                                    <td>1</td>
+                                                                    <td><input [(ngModel)]="fin60"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('60',fin60,'fin60Total')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="fin60Total"></td>
+                                                                    <td>
+                                                                        <input [(ngModel)]="fin60Carga"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('60',fin60Carga,'fin60CargaTotal')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="fin60Carga"></td>
+                                                                    <td><input type="text" [(ngModel)]="fin60Novedades"></td>
+                                                                    <td><input type="text" [(ngModel)]="fin60Comentarios">
+                                                                    </td>
+                                                                </tr>
+
+
+                                                                <!-- Add more rows as needed -->
+                                                            </tbody>
+                                                        </table>
+
+                                                        <h2>Dinteles</h2>
+
+                                                        <table>
+
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Detalle</th>
+                                                                    <th>Unidad</th>
+                                                                    <th>Despacho</th>
+                                                                    <th>Total Despachar</th>
+                                                                    <th>Carga</th>
+                                                                    <th>Total Despachado</th>
+                                                                    <th>Novedades</th>
+                                                                    <th>Comentarios</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>0.5</td>
+                                                                    <td>1</td>
+                                                                    <td><input [(ngModel)]="d1"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('1',d1,'d1Total')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="d1Total"></td>
+                                                                    <td>
+                                                                        <input [(ngModel)]="d1Carga"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('1',d1Carga,'d1CargaTotal')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="d1CargaTotal"></td>
+                                                                    <td><input type="text" [(ngModel)]="d1Novedades"></td>
+                                                                    <td><input type="text" [(ngModel)]="d1Comentarios">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>0.625</td>
+                                                                    <td>1</td>
+                                                                    <td><input [(ngModel)]="d2"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('1',d2,'d2Total')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="d2Total"></td>
+                                                                    <td>
+                                                                        <input [(ngModel)]="d2Carga"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('1',d2Carga,'d2CargaTotal')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="d2CargaTotal"></td>
+                                                                    <td><input type="text" [(ngModel)]="d2Novedades"></td>
+                                                                    <td><input type="text" [(ngModel)]="d2Comentarios">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>0.75</td>
+                                                                    <td>1</td>
+                                                                    <td><input [(ngModel)]="d3"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('1',d3,'d3Total')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="d3Total"></td>
+                                                                    <td>
+                                                                        <input [(ngModel)]="d3Carga"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('1',d3Carga,'d3CargaTotal')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="d3CargaTotal"></td>
+                                                                    <td><input type="text" [(ngModel)]="d3Novedades"></td>
+                                                                    <td><input type="text" [(ngModel)]="d3Comentarios">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>0.875</td>
+                                                                    <td>1</td>
+                                                                    <td><input [(ngModel)]="d4"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('1',d4,'d4Total')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="d4Total"></td>
+                                                                    <td>
+                                                                        <input [(ngModel)]="d4Carga"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('1',d4Carga,'d4CargaTotal')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="d4CargaTotal"></td>
+                                                                    <td><input type="text" [(ngModel)]="d4Novedades"></td>
+                                                                    <td><input type="text" [(ngModel)]="d4Comentarios">
+                                                                    </td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td>1.00</td>
+                                                                    <td>1</td>
+                                                                    <td><input [(ngModel)]="d5"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('1',d5,'d5Total')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="d5Total"></td>
+                                                                    <td>
+                                                                        <input [(ngModel)]="d5Carga"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('1',d5Carga,'d5CargaTotal')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="d5Carga"></td>
+                                                                    <td><input type="text" [(ngModel)]="d5Novedades"></td>
+                                                                    <td><input type="text" [(ngModel)]="d5Comentarios">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>1.125</td>
+                                                                    <td>1</td>
+                                                                    <td><input [(ngModel)]="d6"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('1',d6,'d6Total')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="d6Total"></td>
+                                                                    <td>
+                                                                        <input [(ngModel)]="d6Carga"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('1',d6Carga,'d6CargaTotal')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="d6CargaTotal"></td>
+                                                                    <td><input type="text" [(ngModel)]="d6Novedades"></td>
+                                                                    <td><input type="text" [(ngModel)]="d6Comentarios">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>1.25</td>
+                                                                    <td>1</td>
+                                                                    <td><input [(ngModel)]="d7"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('1',d7,'d7Total')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="d7Total"></td>
+                                                                    <td>
+                                                                        <input [(ngModel)]="d7Carga"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('1',d7Carga,'d7CargaTotal')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="d7CargaTotal"></td>
+                                                                    <td><input type="text" [(ngModel)]="d7Novedades"></td>
+                                                                    <td><input type="text" [(ngModel)]="d7Comentarios">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>1.375</td>
+                                                                    <td>1</td>
+                                                                    <td><input [(ngModel)]="d8"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('1',d8,'d8Total')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="d8Total"></td>
+                                                                    <td>
+                                                                        <input [(ngModel)]="d8Carga"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('1',d8Carga,'d8CargaTotal')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="d8CargaTotal"></td>
+                                                                    <td><input type="text" [(ngModel)]="d8Novedades"></td>
+                                                                    <td><input type="text" [(ngModel)]="d8Comentarios">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>1.50</td>
+                                                                    <td>1</td>
+                                                                    <td><input [(ngModel)]="d9"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('1',d9,'d9Total')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="d9Total"></td>
+                                                                    <td>
+                                                                        <input [(ngModel)]="d9Carga"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('1',d9Carga,'d9CargaTotal')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="d9CargaTotal"></td>
+                                                                    <td><input type="text" [(ngModel)]="d9Novedades"></td>
+                                                                    <td><input type="text" [(ngModel)]="d9Comentarios">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>1.625</td>
+                                                                    <td>1</td>
+                                                                    <td><input [(ngModel)]="d10"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('1',d10,'d10Total')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="d10Total"></td>
+                                                                    <td>
+                                                                        <input [(ngModel)]="d10Carga"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('1',d10Carga,'d10CargaTotal')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="d10CargaTotal"></td>
+                                                                    <td><input type="text" [(ngModel)]="d10Novedades"></td>
+                                                                    <td><input type="text" [(ngModel)]="d10Comentarios">
+                                                                    </td>
+                                                                </tr>
+                                                                <td>1.75</td>
+                                                                <td>1</td>
+                                                                <td><input [(ngModel)]="d11"
+                                                                        [ngModelOptions]="{standalone: true}" matInput
+                                                                        style="color: #1e293b" placeholder="0.00"
+                                                                        type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                        (keyup)="keyPress('1',d11,'d11Total')">
+                                                                </td>
+                                                                <td><input type="text" [(ngModel)]="d11Total"></td>
+                                                                <td>
+                                                                    <input [(ngModel)]="d11Carga"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('1',d11Carga,'d11CargaTotal')">
+                                                                </td>
+                                                                <td><input type="text" [(ngModel)]="d11CargaTotal"></td>
+                                                                <td><input type="text" [(ngModel)]="d11Novedades"></td>
+                                                                <td><input type="text" [(ngModel)]="d11Comentarios">
+                                                                </td>
+                                                                <tr>
+                                                                    <td>1.875</td>
+                                                                    <td>1</td>
+                                                                    <td><input [(ngModel)]="d12"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('1',d12,'d12Total')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="d12Total"></td>
+                                                                    <td>
+                                                                        <input [(ngModel)]="d12Carga"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('1',d12Carga,'d12CargaTotal')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="d12CargaTotal"></td>
+                                                                    <td><input type="text" [(ngModel)]="d12Novedades"></td>
+                                                                    <td><input type="text" [(ngModel)]="d12Comentarios">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>2.00</td>
+                                                                    <td>1</td>
+                                                                    <td><input [(ngModel)]="d13"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('1',d13,'d13Total')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="d13Total"></td>
+                                                                    <td>
+                                                                        <input [(ngModel)]="d13Carga"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('1',d13Carga,'d13CargaTotal')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="d13CargaTotal"></td>
+                                                                    <td><input type="text" [(ngModel)]="d13Novedades"></td>
+                                                                    <td><input type="text" [(ngModel)]="d13Comentarios">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>2.125</td>
+                                                                    <td>1</td>
+                                                                    <td><input [(ngModel)]="d14"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('1',d14,'d14Total')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="d14Total"></td>
+                                                                    <td>
+                                                                        <input [(ngModel)]="d14Carga"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('1',d14Carga,'d14CargaTotal')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="d14CargaTotal"></td>
+                                                                    <td><input type="text" [(ngModel)]="d14Novedades"></td>
+                                                                    <td><input type="text" [(ngModel)]="d14Comentarios">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>2.25</td>
+                                                                    <td>1</td>
+                                                                    <td><input [(ngModel)]="d15"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('1',d15,'d15Total')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="d15Total"></td>
+                                                                    <td>
+                                                                        <input [(ngModel)]="d15Carga"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('1',d15Carga,'d15CargaTotal')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="d15Carga"></td>
+                                                                    <td><input type="text" [(ngModel)]="d15Novedades"></td>
+                                                                    <td><input type="text" [(ngModel)]="d15Comentarios">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>2.375</td>
+                                                                    <td>1</td>
+                                                                    <td><input [(ngModel)]="d16"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('1',d16,'d16Total')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="d16Total"></td>
+                                                                    <td>
+                                                                        <input [(ngModel)]="d16Carga"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('1',d16Carga,'d16CargaTotal')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="d16CargaTotal"></td>
+                                                                    <td><input type="text" [(ngModel)]="d16Novedades"></td>
+                                                                    <td><input type="text" [(ngModel)]="d16Comentarios">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>2.50</td>
+                                                                    <td>1</td>
+                                                                    <td><input [(ngModel)]="d17"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('1',d17,'d17Total')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="d17Total"></td>
+                                                                    <td>
+                                                                        <input [(ngModel)]="d17Carga"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('1',d17Carga,'d17CargaTotal')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="d17CargaTotal"></td>
+                                                                    <td><input type="text" [(ngModel)]="d17Novedades"></td>
+                                                                    <td><input type="text" [(ngModel)]="d17Comentarios">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>2.625</td>
+                                                                    <td>1</td>
+                                                                    <td><input [(ngModel)]="d18"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('1',d18,'d18Total')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="d18Total"></td>
+                                                                    <td>
+                                                                        <input [(ngModel)]="d18Carga"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('1',d18Carga,'d18CargaTotal')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="d18CargaTotal"></td>
+                                                                    <td><input type="text" [(ngModel)]="d18Novedades"></td>
+                                                                    <td><input type="text" [(ngModel)]="d18Comentarios">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>2.75</td>
+                                                                    <td>1</td>
+                                                                    <td><input [(ngModel)]="d19"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('1',d19,'d19Total')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="d19Total"></td>
+                                                                    <td>
+                                                                        <input [(ngModel)]="d19Carga"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('1',d19Carga,'d19CargaTotal')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="d19CargaTotal"></td>
+                                                                    <td><input type="text" [(ngModel)]="d19Novedades"></td>
+                                                                    <td><input type="text" [(ngModel)]="d19Comentarios">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>2.875</td>
+                                                                    <td>1</td>
+                                                                    <td><input [(ngModel)]="d20"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('1',d20,'d20Total')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="d20Total"></td>
+                                                                    <td>
+                                                                        <input [(ngModel)]="d20Carga"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('1',d20Carga,'d20CargaTotal')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="d20CargaTotal"></td>
+                                                                    <td><input type="text" [(ngModel)]="d20Novedades"></td>
+                                                                    <td><input type="text" [(ngModel)]="d20Comentarios">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>3.00</td>
+                                                                    <td>1</td>
+                                                                    <td><input [(ngModel)]="d21"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('1',d21,'d21Total')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="d21Total"></td>
+                                                                    <td>
+                                                                        <input [(ngModel)]="d21Carga"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('1',d21Carga,'d21CargaTotal')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="d21CargaTotal"></td>
+                                                                    <td><input type="text" [(ngModel)]="d21Novedades"></td>
+                                                                    <td><input type="text" [(ngModel)]="d21Comentarios">
+                                                                    </td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td>3.125</td>
+                                                                    <td>1</td>
+                                                                    <td><input [(ngModel)]="d22"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('1',d22,'d22Total')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="d22Total"></td>
+                                                                    <td>
+                                                                        <input [(ngModel)]="d22Carga"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('1',d22Carga,'d22CargaTotal')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="d22CargaTotal"></td>
+                                                                    <td><input type="text" [(ngModel)]="d22Novedades"></td>
+                                                                    <td><input type="text" [(ngModel)]="d22Comentarios">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>3.25</td>
+                                                                    <td>1</td>
+                                                                    <td><input [(ngModel)]="d23"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('1',d23,'d23Total')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="d23Total"></td>
+                                                                    <td>
+                                                                        <input [(ngModel)]="d23Carga"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('1',d23Carga,'d23CargaTotal')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="d23CargaTotal"></td>
+                                                                    <td><input type="text" [(ngModel)]="d23Novedades"></td>
+
+                                                                    <td><input type="text" [(ngModel)]="d23Comentarios">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>3.375</td>
+                                                                    <td>1</td>
+                                                                    <td><input [(ngModel)]="d24"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('1',d24,'d24Total')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="d24Total"></td>
+                                                                    <td>
+                                                                        <input [(ngModel)]="d24Carga"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('1',d24Carga,'d24CargaTotal')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="d24CargaTotal"></td>
+                                                                    <td><input type="text" [(ngModel)]="d24Novedades"></td>
+                                                                    <td><input type="text" [(ngModel)]="d24Comentarios">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>3.50</td>
+                                                                    <td>1</td>
+                                                                    <td><input [(ngModel)]="d25"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('1',d25,'d25Total')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="d25Total"></td>
+                                                                    <td>
+                                                                        <input [(ngModel)]="d25Carga"
+                                                                            [ngModelOptions]="{standalone: true}" matInput
+                                                                            style="color: #1e293b" placeholder="0.00"
+                                                                            type="number" required min="0.01" step="0.01" (keyup)="numPositivo($event)"
+                                                                            (keyup)="keyPress('1',d25Carga,'d25CargaTotal')">
+                                                                    </td>
+                                                                    <td><input type="text" [(ngModel)]="d25Carga"></td>
+                                                                    <td><input type="text" [(ngModel)]="d25Novedades"></td>
+                                                                    <td><input type="text" [(ngModel)]="d25Comentarios">
+                                                                    </td>
+                                                                </tr>
+
+
+                                                                <!-- Add more rows as needed -->
+                                                            </tbody>
+                                                        </table>
+
+
+                                                        <div class="flex justify-endy- gap-2 py-[16px] px-[24px]">
+
+                                                            <div>
+                                                                <button (click)="guardarRegion()"
+                                                                    class="btn4 bg-white text-black dark:text-black "
+                                                                    style="width: 100%; text-align: end;">{{ botton }}
+                                                                </button>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </ng-template>
+
+
+                                                <!--Sin datos-->
+
+                                                <ng-template #noProducts>
+                                                    <div
+                                                        class="p-8 sm:p-16 border-t text-4xl font-semibold tracking-tight text-center">
+                                                        There are no products!
+                                                    </div>
+                                                </ng-template>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+
+
+    </div>
+
+</div>
