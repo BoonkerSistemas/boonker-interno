@@ -145,6 +145,7 @@ export class ListaProyectosComponent
                     //let ordenedesa = [];
                     element.purchaseOrder[0].forEach((element2) => {
                         console.log('secciones ', element2)
+                        //localStorage.setItem('descuento', (element2.purchaseOrder[0].descuento).toString())
                         //ordenedesa.push(element2);
                         //this.orderByTitulo(element2);
                         console.log(element2.section[0].titulo);

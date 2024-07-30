@@ -422,7 +422,17 @@
                     <!-- Issues -->
                     <div class="flex w-full justify-between items-center gap-10 p-2 bg-card overflow-hidden border-b">
                         <div class="text-center">
-                            <div class="text-sm font-bold tracking-tight leading-6 truncate uppercase">Iva</div>
+                            <div class="text-sm font-bold tracking-tight leading-6 truncate uppercase">descuento aplicado <span class="text-lg">{{porcentajeDescuento}}%</span> </div>
+                        </div>
+                        <div class="flex flex-col items-cente">
+                            <div class="text-md font-bold tracking-tight leading-none text-amber-500 pr-32">
+                                $ {{(+(descuento).toFixed(2)).toLocaleString('de-DE')}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex w-full justify-between items-center gap-10 p-2 bg-card overflow-hidden border-b">
+                        <div class="text-center">
+                            <div class="text-sm font-bold tracking-tight leading-6 truncate uppercase">Iva <span class="text-lg">5%</span></div>
                         </div>
                         <div class="flex flex-col items-cente">
                             <div class="text-md font-bold tracking-tight leading-none text-amber-500 pr-32">
@@ -430,16 +440,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="flex w-full justify-between items-center gap-10 p-2 bg-card overflow-hidden border-b">
-                        <div class="text-center">
-                            <div class="text-sm font-bold tracking-tight leading-6 truncate uppercase">porcentaje de iva aplicado</div>
-                        </div>
-                        <div class="flex flex-col items-cente">
-                            <div class="text-md font-bold tracking-tight leading-none text-amber-500 pr-32">
-                                {{5}}%
-                            </div>
-                        </div>
-                    </div>
+                    
                     <!-- Features -->
                     <div class="flex w-full justify-between items-center gap-10 p-2 bg-card overflow-hidden border-b">
                         <div class="text-center">
@@ -448,7 +449,7 @@
                         <div class="flex flex-col items-center mt-2">
                             <div class="text-md font-bold tracking-tight leading-none text-sky-800 pr-32">
                                 <!-- $ {{ pedido.total.toLocaleString('de-DE') }} -->
-                                 ${{(+(pedido.subtotal + pedido.iva).toFixed(2)).toLocaleString('de-DE')}}
+                                 ${{(+(pedido.total).toFixed(2)).toLocaleString('de-DE')}}
                             </div>
                         </div>
                     </div>

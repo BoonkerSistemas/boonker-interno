@@ -11,6 +11,7 @@ import { CrearOrdenComponent } from './crearOrden/crearOrden.component';
 import { OrdenGeneralService } from 'app/services/ordenGeneral/ordenGeneral.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { items } from 'app/mock-api/apps/file-manager/data';
+import { ProyectosService } from 'app/modules/admin/proyectos/proyectos.service';
 
 @Component({
     selector: 'app-orden-generica',
@@ -90,6 +91,9 @@ export class OrdenGenericaComponent {
         'precio',
         'total',
     ];
+    descuento = 0
+    porcentajeDescuento = ''
+    project = ''
     //columnsToDisplay: string[] = this.displayedColumnsDinamico.slice();
 
     /**
@@ -101,13 +105,17 @@ export class OrdenGenericaComponent {
         private readonly alertService: AlertService,
         private ordenGeneralService: OrdenGeneralService,
         private readonly activatedRouteService: ActivatedRoute,
-        private routerService: Router
-    ) {}
+        private routerService: Router,
+        private _inventoryService: ProyectosService,
+    ) {
+        
+    }
 
     ngOnInit(): void {
         this.activatedRouteService.params.subscribe(async (parametros) => {
-            // console.log('PARAMETRO POR RUTA', parametros.id);
+            console.log('PARAMETRO POR RUTA', parametros.id);
             this.idProyecto = parametros.id;
+            this._changeDetectorRef.markForCheck();
         });
         this.consultarOrdenPedido();
         //this.formatoMoneda();
@@ -144,7 +152,9 @@ export class OrdenGenericaComponent {
                         this.pedido = data;
                         //console.log('pedido ', this.pedido)
                         this.proyectosOp$ = new MatTableDataSource(this.formatoValores);
+                        this.consultarProductos()
                         //this.proyectosOp$.paginator = this.paginator2;
+                        
                         this._changeDetectorRef.markForCheck();
 
                         return data1;
@@ -153,6 +163,26 @@ export class OrdenGenericaComponent {
         } catch (e) {
             console.log(e);
         }
+    }
+
+    async consultarProductos() {
+        console.log('proyectos ', this.idProyecto)
+        this._inventoryService
+            .findAll(this.idProyecto)
+            .subscribe(async (value) => {
+                console.log(value);
+
+                value.module.forEach((element) => {
+                    //let ordenedesa = [];
+                    element.purchaseOrder[0].forEach((element2) => {
+                        console.log('secciones ', element2.purchaseOrder[0].descuento)
+                        const descuento = element2.purchaseOrder[0].descuento
+                        this.porcentajeDescuento = element2.purchaseOrder[0].descuento
+                        this.descuento = (+descuento/100) * (this.pedido.subtotal)
+                        console.log('valor descuento ', this.descuento)
+                    });
+                });
+            });
     }
 
     calcular() {
